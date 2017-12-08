@@ -2,13 +2,13 @@ import { JsonController, Get } from 'routing-controllers';
 import { Service } from 'typedi';
 
 @Service()
-@JsonController()
-export class IntroController {
+@JsonController('/<%= name %>')
+export class <%= upCaseName %>Controller {
 
-  constructor() {}
+  constructor() { }
 
   @Get('/')
-  execute() {
+  execute(): string {
     return 'Hello World, Typescript!';
   }
 }

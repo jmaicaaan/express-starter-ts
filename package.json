@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node ./dist/server.js",
+    "start": "node ./dist/app.js",
     "watch": "nodemon --watch server/src --ext ts --exec npm run build && npm start",
     "build": "tsc"
   },
@@ -25,6 +25,9 @@
     "express": "^4.16.2",
     "mocha": "^4.0.1",
     "nodemon": "^1.12.5",
+    "reflect-metadata": "^0.1.10",
+    "routing-controllers": "^0.7.6",
+    "typedi": "^0.6.0",
     "typescript": "^2.6.2"
   },
   "devDependencies": {
@@ -32,6 +35,12 @@
     "@types/cookie-parser": "^1.4.1",
     "@types/express": "^4.0.39",
     "@types/mocha": "^2.2.44",
-    "@types/node": "^8.0.56"
+    "@types/node": "^8.0.56",
+    "gulp": "^3.9.1",
+    "gulp-delete-lines": "0.0.7",
+    "gulp-insert": "^0.5.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-template": "^4.0.0",
+    "yargs": "^10.0.3"
   }
 }

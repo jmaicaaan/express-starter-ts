@@ -8,8 +8,7 @@ routing_controllers_1.useContainer(typedi_1.Container);
 var app = routing_controllers_1.createExpressServer({
     controllers: [
         index_1.IntroController,
-        index_1.UserController,
-        index_1.TestController
+        index_1.UserController
     ]
 });
 var port = process.env.PORT || 1111;
