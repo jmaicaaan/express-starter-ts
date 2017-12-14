@@ -5,9 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node ./dist/app.js",
-    "watch": "nodemon --watch server/src --ext ts --exec npm run build && npm start",
-    "build": "tsc"
+    "start": "ts-node src/app.ts",
+    "watch": "nodemon",
+    "watch:build": "tsc --outDir ./dist && node ./dist/app.js"
   },
   "repository": {
     "type": "git",
