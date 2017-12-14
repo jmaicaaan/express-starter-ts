@@ -1,14 +1,18 @@
-import { JsonController, Get } from 'routing-controllers';
+import { Get, JsonController } from 'routing-controllers';
 import { Service } from 'typedi';
+import { User } from '../../entities/user';
 
 @Service()
 @JsonController()
 export class IntroController {
 
-  constructor() {}
+  constructor() {
+    // do nothing
+   }
 
   @Get('/')
-  execute() {
-    return 'Hello World, Typescript!';
+  async execute() {
+    const users = await User.find();
+    return users;
   }
 }

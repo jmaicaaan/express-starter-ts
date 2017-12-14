@@ -25,9 +25,12 @@
     "express": "^4.16.2",
     "mocha": "^4.0.1",
     "nodemon": "^1.12.5",
+    "pg": "^7.4.0",
     "reflect-metadata": "^0.1.10",
     "routing-controllers": "^0.7.6",
     "typedi": "^0.6.0",
+    "typeorm": "^0.1.9",
+    "typeorm-typedi-extensions": "^0.1.1",
     "typescript": "^2.6.2"
   },
   "devDependencies": {
