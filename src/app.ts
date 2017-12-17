@@ -1,34 +1,31 @@
-import { createExpressServer, useContainer } from 'routing-controllers';
-import { Container } from 'typedi';
-import { IntroController, UserController } from './controllers/index';
-
 import 'reflect-metadata';
-import { createConnection } from 'typeorm';
+import { createExpressServer, useContainer as routingUseContainer } from 'routing-controllers';
+import { Container } from 'typedi';
+import { createConnection, useContainer as ormUseContainer } from 'typeorm';
+import { DeleteUserController, GetUserController, PostUserController } from './controllers/';
 import { User } from './entities/user';
 
-useContainer(Container);
+// let's tell orm and the routing controller to use the typeDI
+// https://github.com/typestack/typedi/issues/4
+
+ormUseContainer(Container);
+routingUseContainer(Container);
 
 const app = createExpressServer({
   controllers: [
-    IntroController,
-    UserController
+    GetUserController,
+    PostUserController,
+    DeleteUserController
   ]
 });
 
 // tslint:disable-next-line:arrow-parens
 createConnection().then(async (connection) => {
-  const user = new User();
-  user.email = 'test@email.com';
-  user.password = 'password123';
-  user.enabled = true;
-  user.created = new Date();
-
-  let userRepository = connection.getRepository(User);
-  await userRepository.save(user);
+  console.log('connection has been setup!');
 });
 
 const port = process.env.PORT || 1111;
 
 app.listen(port, () => {
-  console.log(`The server is starting at http://localhost:${port}`);
+  console.log(`The server is listening at http://localhost:${port}`);
 });

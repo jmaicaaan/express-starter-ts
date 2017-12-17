@@ -1,7 +1,7 @@
-import { BaseEntity, Column, Entity, PrimaryGeneratedColumn  } from 'typeorm';
+import { Column, Entity, PrimaryGeneratedColumn  } from 'typeorm';
 
 @Entity()
-export class User extends BaseEntity {
+export class User {
 
   @PrimaryGeneratedColumn()
   id: number;
@@ -12,7 +12,7 @@ export class User extends BaseEntity {
   @Column('text')
   password: string;
 
-  @Column('boolean')
+  @Column('boolean', { default: true })
   enabled: boolean;
 
   @Column('timestamp')
