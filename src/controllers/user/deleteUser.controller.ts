@@ -1,22 +1,22 @@
 import { JsonController, Param, Post } from 'routing-controllers';
 import { Service } from 'typedi';
 import { OrmRepository } from 'typeorm-typedi-extensions';
-import { UserService } from '../../services/';
+import { UserRepository } from 'repositories';
 
 @Service()
 @JsonController('/users/:id')
 export class DeleteUserController {
 
   constructor(
-    @OrmRepository() private userService: UserService
+    @OrmRepository() private userRepository: UserRepository
   ) {}
 
   @Post()
   async execute(
     @Param('id') userId: number
   ) {
-    // void 
-    await this.userService.deleteUserById(userId);
+    // void
+    await this.userRepository.deleteUserById(userId);
     return `User with id ${userId} has been deleted`;
   }
 }
