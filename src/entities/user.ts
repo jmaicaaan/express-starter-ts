@@ -1,4 +1,6 @@
-import { Column, Entity, PrimaryGeneratedColumn  } from 'typeorm';
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn  } from 'typeorm';
+import { AccessToken } from './accessToken';
+import { RoleMapping } from './roleMapping';
 
 @Entity()
 export class User {
@@ -15,6 +17,12 @@ export class User {
   @Column('boolean', { default: true })
   enabled: boolean;
 
-  @Column('timestamp')
+  @Column('timestamp', { default: new Date() })
   created: Date;
+
+  @OneToMany((type) => AccessToken, (accessToken) => accessToken.user)
+  accessToken: AccessToken[];
+
+  @OneToMany((type) => RoleMapping, (roleMapping) => roleMapping.user)
+  roleMapping: RoleMapping[];
 }
