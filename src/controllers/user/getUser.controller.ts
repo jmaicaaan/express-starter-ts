@@ -1,19 +1,19 @@
 import { Get, JsonController } from 'routing-controllers';
 import { Service } from 'typedi';
 import { OrmRepository } from 'typeorm-typedi-extensions';
-import { UserService } from '../../services/';
+import { UserRepository } from 'repositories';
 
 @Service()
 @JsonController('/users')
 export class GetUserController {
 
   constructor(
-    @OrmRepository() private userService: UserService
+    @OrmRepository() private userRepository: UserRepository
   ) {}
 
   @Get()
   async execute() {
-    const users = await this.userService.getUsers();
+    const users = await this.userRepository.getUsers();
     return users;
   }
 }

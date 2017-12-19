@@ -5,11 +5,17 @@
     "sourceMap": true,
     "outDir": "./dist",
     "sourceRoot": "src",
+    "baseUrl": "src",
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
     "lib": [
       "es2015"
-    ]
+    ],
+    "paths": {
+      "controllers/": ["/controllers/"],
+      "entities/": ["/entities/"],
+      "repositories/": ["/repositories/"]
+    }
   },
   "exclude": [
     "node_modules",

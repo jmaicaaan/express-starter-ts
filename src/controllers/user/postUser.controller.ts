@@ -1,15 +1,15 @@
 import { JsonController, Post } from 'routing-controllers';
 import { Service } from 'typedi';
 import { OrmRepository } from 'typeorm-typedi-extensions';
-import { User } from '../../entities/user';
-import { UserService } from '../../services/';
+import { User } from 'entities';
+import { UserRepository } from 'repositories';
 
 @Service()
 @JsonController('/users')
 export class PostUserController {
 
   constructor(
-    @OrmRepository() private userService: UserService
+    @OrmRepository() private userRepository: UserRepository
   ) {}
 
   @Post()
@@ -19,7 +19,7 @@ export class PostUserController {
     user.password = 'password123';
     user.created = new Date();
 
-    const createdUser = await this.userService.createUser(user);
+    const createdUser = await this.userRepository.createUser(user);
     return createdUser;
   }
 }
