@@ -2,8 +2,9 @@ import 'reflect-metadata';
 import { createExpressServer, useContainer as routingUseContainer } from 'routing-controllers';
 import { Container } from 'typedi';
 import { createConnection, useContainer as ormUseContainer } from 'typeorm';
-import { DeleteUserController, GetUserController, PostUserController } from 'controllers';
-import { User } from 'entities';
+
+import { DeleteUserController, GetUserController, PostUserController } from './controllers';
+import { User } from './entities';
 
 // let's tell orm and the routing controller to use the typeDI
 // https://github.com/typestack/typedi/issues/4

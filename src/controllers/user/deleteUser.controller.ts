@@ -1,7 +1,7 @@
 import { JsonController, Param, Post } from 'routing-controllers';
 import { Service } from 'typedi';
 import { OrmRepository } from 'typeorm-typedi-extensions';
-import { UserRepository } from 'repositories';
+import { UserRepository } from '../../repositories';
 
 @Service()
 @JsonController('/users/:id')

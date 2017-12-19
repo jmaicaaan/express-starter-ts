@@ -12,9 +12,9 @@
       "es2015"
     ],
     "paths": {
-      "controllers/": ["/controllers/"],
-      "entities/": ["/entities/"],
-      "repositories/": ["/repositories/"]
+      "controllers/*": ["/controllers/*"],
+      "entities/*": ["/entities/*"],
+      "repositories/*": ["/repositories/*"]
     }
   },
   "exclude": [

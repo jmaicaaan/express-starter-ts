@@ -1,7 +1,7 @@
 import { Service } from 'typedi';
 import { EntityRepository, Repository } from 'typeorm';
 import { OrmRepository } from 'typeorm-typedi-extensions';
-import { User } from 'entities';
+import { User } from '../entities';
 
 @Service()
 @EntityRepository(User)

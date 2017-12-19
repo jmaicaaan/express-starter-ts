@@ -1,6 +1,5 @@
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn  } from 'typeorm';
-import { AccessToken } from './accessToken';
-import { RoleMapping } from './roleMapping';
+import { AccessToken, RoleMapping } from '../entities';
 
 @Entity()
 export class User {
