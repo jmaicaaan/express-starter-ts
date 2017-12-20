@@ -3,7 +3,7 @@ import { createExpressServer, useContainer as routingUseContainer } from 'routin
 import { Container } from 'typedi';
 import { createConnection, useContainer as ormUseContainer } from 'typeorm';
 
-import { DeleteUserController, GetUserController, PostUserController } from './controllers';
+import { IntroController, DeleteUserController, GetUserController, PostUserController } from './controllers';
 import { User } from './entities';
 
 // let's tell orm and the routing controller to use the typeDI
@@ -14,6 +14,7 @@ routingUseContainer(Container);
 
 const app = createExpressServer({
   controllers: [
+    IntroController,
     GetUserController,
     PostUserController,
     DeleteUserController
