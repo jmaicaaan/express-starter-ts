@@ -8,7 +8,8 @@ This repository gives the developer an Express Starter Typescript to kick off th
 
 # Documentation
   - The definitions that we set to the different parts of our structure. With that, we will discuss what is `command design pattern` and why do we use it.
-  ![alt text](https://lh4.googleusercontent.com/BXctKdlruuz4yM8dYCQVbPIb62EzLSMwCgJie5XSSgun1zbKx9fwwJ54d_7U_mT3yjc2d3ayhdrvOP6TA1Jy=w1974-h1241)
+
+    ![alt text](https://lh5.googleusercontent.com/V8usgj_sSBb9RzgU6EcjRdprjX1rGjYhroxtsMdibiQQbmq26rlrCeNRNg05JYRvCB7swgKQk7-huKya4XNE=w1891-h1240)
 
 # Entity
   - What is an entity? An entity represents the instance what will be saved into your database. An entity is like a table instance to your database.
@@ -32,4 +33,4 @@ This repository gives the developer an Express Starter Typescript to kick off th
 
 # Services
   - What is a service? A service is similar to reposotories but instead of communicating to database it communicates to other 3rd party libraries (nodemailer, bcrypt, etc). This acts like a facade layer of other libraries and available on the whole application. **The service file can contain multiple methods but each method is doing only one thing.**
-  - The repository will be injected into a controller that communicate to the other libraries. Basically its a class that has methods.
+  - The service will be injected into a controller that communicate to the other libraries. Basically its a class that has methods.
