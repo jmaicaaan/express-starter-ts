@@ -11,7 +11,7 @@ describe('getUserController', () => {
   describe('list of users', () => {
     // needs to enhance this one
     // setup an enum probably? or make it a url instead of method + route
-    assertRequest([+process.env.PORT], 'get', 'users', (res) => {
+    assertRequest('get', 'users', (res) => {
       assert.notEqual(res.body.length, 0);
     });
   });

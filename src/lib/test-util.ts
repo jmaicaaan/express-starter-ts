@@ -1,56 +1,47 @@
 import * as chakram from 'chakram';
-import { createExpressServer, Get, getMetadataArgsStorage, JsonController,
-  useContainer as routingUseContainer } from 'routing-controllers';
+import {
+  createExpressServer, Get, getMetadataArgsStorage, JsonController,
+  useContainer as routingUseContainer
+} from 'routing-controllers';
 import { Container } from 'typedi';
 import { Connection, createConnection, useContainer as ormUseContainer } from 'typeorm';
 import { bootstrapContainers } from '../lib/bootstrap-containers';
 import { bootstrapDB } from '../lib/bootstrap-db';
 import { bootstrapServer } from '../lib/bootstrap-server';
 
-export function assertRequest(ports: number[], method: string, route: string, callback: (response: any) => any): void;
-export function assertRequest(ports: number[], method: string, route: string,
-                              dataOrOptions: any, callback: (response: any) => any): void;
-export function assertRequest(ports: number[], method: string, route: string, data: any,
-                              requestOptions: any, callback: (response: any) => any): void;
-export function assertRequest(ports: number[], method: string, route: string,
-                              dataOrCallback: any | ((response: any) => any),
+export function assertRequest(method: string, route: string, dataOrCallback: any | ((response: any) => any),
                               dataOrRequestOptionsOrCallback?: any | ((response: any) => any),
                               maybeCallback?: (response: any) => any): void {
 
   const args = arguments.length;
+  const port = process.env.PORT;
 
-  ports.forEach((port) => {
+  it('asserting port ' + port, async () => {
+    let unhandledRejection: Error = undefined;
+    const captureRejection = (e: Error) => { unhandledRejection = e; };
+    process.on('unhandledRejection', captureRejection);
 
-    it('asserting port ' + port, async () => {
-      let unhandledRejection: Error = undefined;
-      const captureRejection = (e: Error) => { unhandledRejection = e; };
-      process.on('unhandledRejection', captureRejection);
-
-      try {
-        let r;
-        if (args === 4) {
-          r = await chakram[method](`http://127.0.0.1:${port}/${route}`).then(dataOrCallback as Function);
-        } else if (args === 5) {
-          r = await chakram[method](`http://127.0.0.1:${port}/${route}`, dataOrCallback as any)
-            .then(dataOrRequestOptionsOrCallback as Function);
-        } else if (args === 6) {
-          r = await chakram[method](`http://127.0.0.1:${port}/${route}`, dataOrCallback as any,
-            dataOrRequestOptionsOrCallback as any).then(maybeCallback);
-        } else {
-          throw new Error('No assertion has been performed');
-        }
-
-        if (unhandledRejection) {
-          const e = new Error('There was an unhandled rejection while processing the request');
-          e.stack += '\nCaused by: ' + unhandledRejection.stack;
-          throw e;
-        }
-
-        return r;
-      } finally {
-        process.removeListener('unhandledRejection', captureRejection);
+    try {
+      let r;
+      if (args === 3) { // get request
+        r = await chakram[method](`http://127.0.0.1:${port}/${route}`).then(dataOrCallback as Function);
+      } else if (args === 4) { // post request
+        r = await chakram[method](`http://127.0.0.1:${port}/${route}`, dataOrCallback as any)
+          .then(dataOrRequestOptionsOrCallback as Function);
+      } else {
+        throw new Error('No assertion has been performed');
       }
-    });
+
+      if (unhandledRejection) {
+        const e = new Error('There was an unhandled rejection while processing the request');
+        e.stack += '\nCaused by: ' + unhandledRejection.stack;
+        throw e;
+      }
+
+      return r;
+    } finally {
+      process.removeListener('unhandledRejection', captureRejection);
+    }
   });
 }
 
