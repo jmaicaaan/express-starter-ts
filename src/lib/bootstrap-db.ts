@@ -1,14 +1,17 @@
+import { join } from 'path';
 import { Connection, createConnection } from 'typeorm';
 
 export async function bootstrapDB() {
   let connection: Connection;
   let databaseConfig: any = {};
+  let configBasePath = join(process.cwd(), 'config/');
 
   try {
-    databaseConfig = require(`../../config/ormconfig.${process.env.NODE_ENV}.json`);
-    console.log(`using ${process.env.NODE_ENV} ormconfig`);
+    const path = join(configBasePath, `ormconfig.${process.env.NODE_ENV}`, '.json');
+    databaseConfig = require(path);
   } catch (error) {
-    databaseConfig = require(`../../config/ormconfig.json`);
+    const path = join(configBasePath, 'ormconfig.json');
+    databaseConfig = require(path);
   }
 
   connection = await createConnection(databaseConfig);
