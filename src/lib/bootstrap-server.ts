@@ -1,5 +1,4 @@
-import { createExpressServer, useContainer as routingUseContainer } from 'routing-controllers';
-import { DeleteUserController, GetUserController, IntroController, PostUserController } from '../controllers';
+import { createExpressServer } from 'routing-controllers';
 
 export function bootstrapServer(controllers: any[]) {
   const app = createExpressServer({
