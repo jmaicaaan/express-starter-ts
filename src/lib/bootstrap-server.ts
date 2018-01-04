@@ -1,17 +1,28 @@
 import { createExpressServer } from 'routing-controllers';
+import { Service } from 'typedi';
 
-export function bootstrapServer(controllers: any[]) {
-  const app = createExpressServer({
-    controllers
-  });
+@Service()
+export class BootstrapServer {
 
-  const port = process.env.PORT || 1111;
-  const server = app.listen(port, () => {
-    console.log(`The server is listening at http://localhost:${port}`);
-  });
+  private app;
 
-  return {
-    app,
-    server
-  };
+  public bootApp() {
+    if (this.app) {
+      return this.app;
+    }
+
+    const express = createExpressServer({
+      controllers: [ __dirname + '/../controllers/**/*.controller.js' ]
+    });
+
+    this.app = express;
+    return this.app;
+  }
+
+  public startListening() {
+    const port = process.env.PORT || 3000;
+    const app = this.bootApp();
+
+    app.listen(port, () => { console.log(`The server is listening at http://localhost:${port}`); });
+  }
 }
