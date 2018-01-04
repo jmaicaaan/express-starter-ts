@@ -5,16 +5,21 @@ import { User } from '../entities';
 @Entity()
 export class AccessToken {
 
+  constructor(token: string, user: User) {
+    this.token = token;
+    this.user = user;
+  }
+
   @PrimaryGeneratedColumn()
   id: number;
 
   @Column()
   token: string;
 
-  @Column()
-  ttl: Date;
+  @Column('text', { default: '604800' }) // 1 week default
+  ttl: string;
 
-  @Column('timestamp')
+  @Column('timestamp',  { default: new Date() })
   created: Date;
 
   @ManyToOne((type) => User, (user) => user.accessToken)

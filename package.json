@@ -22,9 +22,11 @@
   },
   "homepage": "https://github.com/jmaicaaan/express-starter-ts#readme",
   "dependencies": {
+    "bcrypt": "^1.0.3",
     "body-parser": "^1.18.2",
     "cookie-parser": "^1.4.3",
     "express": "^4.16.2",
+    "lodash": "^4.17.4",
     "mocha": "^4.0.1",
     "nodemon": "^1.12.5",
     "pg": "^7.4.0",
