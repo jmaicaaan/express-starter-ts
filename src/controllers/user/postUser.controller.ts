@@ -1,6 +1,7 @@
-import { JsonController, Post, Body } from 'routing-controllers';
+import { Body, JsonController, Post } from 'routing-controllers';
 import { Service } from 'typedi';
 import { OrmRepository } from 'typeorm-typedi-extensions';
+
 import { User } from '../../entities';
 import { UserRepository } from '../../repositories';
 

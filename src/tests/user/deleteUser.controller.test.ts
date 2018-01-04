@@ -1,13 +1,11 @@
 import 'reflect-metadata';
 import supertest = require('supertest');
-import { expect } from 'chai'
-
-import { Container } from 'typedi/Container';
-import { BootstrapServer } from '../../lib/bootstrap-server';
+import { expect } from 'chai';
+import { Container } from 'typedi';
 import { Connection } from 'typeorm';
+
 import { User } from '../../entities';
-import { bootstrapContainers } from '../../lib/bootstrap-containers';
-import { bootstrapDB } from '../../lib/bootstrap-db';
+import { BootstrapServer } from '../../utils';
 
 const app = Container.get(BootstrapServer).bootApp();
 const server = supertest(app);
@@ -31,7 +29,7 @@ describe('#deleteUserController', () => {
     const response = await server
       .post('/users/' + createdUser.id)
       .expect(200);
-    const options = { where: { id: createdUser.id } }
+    const options = { where: { id: createdUser.id } };
     const findResponse = await server
       .get('/users/')
       .query({ options })

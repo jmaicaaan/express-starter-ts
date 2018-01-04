@@ -2,18 +2,9 @@
   "type": "postgres",
   "host": "localhost",
   "port": 5432,
-  "username": "postgres",
-  "password": "jmsantos17",
+  "username": "sample",
+  "password": "sample",
   "database": "sample",
   "synchronize": true,
-  "logging": false,
-  "entities": [
-     "dist/entities/*.js"
-  ],
-  "migrations": [
-     "src/migration/**/*.ts"
-  ],
-  "subscribers": [
-     "src/subscriber/**/*.ts"
-  ]
+  "logging": false
 }

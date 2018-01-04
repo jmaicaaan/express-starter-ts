@@ -1,12 +1,10 @@
 import 'reflect-metadata';
 import supertest = require('supertest');
-import { expect } from 'chai'
-
-import { Container } from 'typedi/Container';
-import { BootstrapServer } from '../../lib/bootstrap-server';
+import { expect } from 'chai';
+import { Container } from 'typedi';
 import { Connection } from 'typeorm';
-import { bootstrapContainers } from '../../lib/bootstrap-containers';
-import { bootstrapDB } from '../../lib/bootstrap-db';
+
+import { BootstrapServer } from '../../utils';
 
 const app = Container.get(BootstrapServer).bootApp();
 const server = supertest(app);

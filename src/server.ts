@@ -1,9 +1,7 @@
 import 'reflect-metadata';
-
 import { Container } from 'typedi';
-import { bootstrapContainers } from './lib/bootstrap-containers';
-import { bootstrapDB } from './lib/bootstrap-db';
-import { BootstrapServer } from './lib/bootstrap-server';
+
+import { bootstrapContainers, bootstrapDB, BootstrapServer } from './utils';
 
 bootstrapContainers();
 

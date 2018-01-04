@@ -1,6 +1,7 @@
 import { Service } from 'typedi';
-import { EntityRepository, Repository, FindManyOptions } from 'typeorm';
+import { EntityRepository, FindManyOptions, Repository } from 'typeorm';
 import { OrmRepository } from 'typeorm-typedi-extensions';
+
 import { User } from '../entities';
 
 @EntityRepository(User)

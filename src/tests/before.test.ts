@@ -1,9 +1,7 @@
-import { Container } from "typedi/Container";
-import { BootstrapServer } from "../lib/bootstrap-server";
+import { Container } from 'typedi/Container';
+import { Connection } from 'typeorm';
 
-import { bootstrapDB } from "../lib/bootstrap-db";
-import { Connection } from "typeorm";
-import { bootstrapContainers } from "../lib/bootstrap-containers";
+import { bootstrapContainers, bootstrapDB, BootstrapServer } from '../utils';
 
 before(async () => {
   bootstrapContainers();
