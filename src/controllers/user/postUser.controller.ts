@@ -1,4 +1,4 @@
-import { JsonController, Post } from 'routing-controllers';
+import { JsonController, Post, Body } from 'routing-controllers';
 import { Service } from 'typedi';
 import { OrmRepository } from 'typeorm-typedi-extensions';
 import { User } from '../../entities';
@@ -13,12 +13,9 @@ export class PostUserController {
   ) {}
 
   @Post()
-  async execute() {
-    const user = new User();
-    user.email = 'jsantos@isbx.com';
-    user.password = 'password123';
-    user.created = new Date();
-
+  async execute(
+    @Body() user: User
+  ) {
     const createdUser = await this.userRepository.createUser(user);
     return createdUser;
   }

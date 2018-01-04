@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "target": "es5",
+    "target": "es6",
     "module": "commonjs",
     "sourceMap": true,
     "outDir": "./dist",
@@ -10,12 +10,7 @@
     "emitDecoratorMetadata": true,
     "lib": [
       "es2015"
-    ],
-    "paths": {
-      "controllers/*": ["/controllers/*"],
-      "entities/*": ["/entities/*"],
-      "repositories/*": ["/repositories/*"]
-    }
+    ]
   },
   "exclude": [
     "node_modules",
