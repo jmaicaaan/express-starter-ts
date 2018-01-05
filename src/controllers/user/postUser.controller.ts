@@ -4,7 +4,7 @@ import { OrmRepository } from 'typeorm-typedi-extensions';
 
 import { User } from '../../entities';
 import { UserRepository } from '../../repositories';
-import { BcryptService } from '../../services/';
+import { BcryptService } from '../../services';
 
 @Service()
 @JsonController('/users')
