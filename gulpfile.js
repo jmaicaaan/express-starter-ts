@@ -95,3 +95,8 @@ gulp.task('add-entity', ['create-file-entity'], () => {
     .pipe(gulp.dest(destinationPath));
 });
 
+gulp.task('createTravisOrmConfig', [], () => {
+  return gulp.src('./config/ormconfig.test.json')
+      .pipe(gulpRename('ormconfig.yml.travis'))
+      .pipe(gulp.dest('./'));
+});
