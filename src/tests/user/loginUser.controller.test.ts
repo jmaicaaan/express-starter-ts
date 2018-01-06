@@ -4,6 +4,7 @@ import { expect } from 'chai';
 import { Container } from 'typedi';
 import { Connection } from 'typeorm';
 
+import { IRole } from '../../enums';
 import { BootstrapServer } from '../../utils';
 
 const app = Container.get(BootstrapServer).bootApp();
@@ -16,8 +17,11 @@ describe('#loginUserController', () => {
     const response = await server
       .post('/users/')
       .send({
-        email: 'test-user-' + Date.now(),
-        password: 'password123'
+        user: {
+          email: 'test-user-' + Date.now(),
+          password: 'password123'
+        },
+        role: IRole.Admin
       })
       .expect(200);
     createdUser = response.body;

@@ -1,5 +1,5 @@
+import { Container, Inject } from 'typedi';
 import { EntityRepository, Repository } from 'typeorm';
-import { Inject, Container } from 'typedi';
 
 import { AccessToken, User } from '../entities';
 
