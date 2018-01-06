@@ -34,12 +34,11 @@ describe('#getUserController', () => {
     const options = { where: { id: createdUser.id } };
     const response = await server
       .get('/users/')
+      .set('Authorization', '3efd9ced2f840576a5f638a030fa84')
       .query({ options })
       .expect(200);
 
     expect(response.body).to.be.a('array');
     expect(response.body).to.have.lengthOf(1);
-
-
   });
 });

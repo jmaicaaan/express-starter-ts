@@ -26,7 +26,7 @@ export class LoginUserController {
           enabled: true
         }
       });
-      const password = await this.bcryptService.compareHash(user.password, currentUser.password)
+      const password = await this.bcryptService.compareHash(user.password, currentUser.password);
       if (currentUser && password) {
         const token = await this.cryptoService.createToken();
         const accessToken = await this.accessTokenRepository.addAccessToken(token, currentUser);
@@ -34,6 +34,7 @@ export class LoginUserController {
       }
       throw new Error('Invalid login');
     } catch (error) {
+      console.log('error', error);
       throw error;
     }
   }

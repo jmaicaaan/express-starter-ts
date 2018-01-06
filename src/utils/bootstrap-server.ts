@@ -1,6 +1,8 @@
 import { createExpressServer } from 'routing-controllers';
 import { Service } from 'typedi';
 
+import { authorizationChecker } from '../middlewares/authorization.checker';
+
 @Service()
 export class BootstrapServer {
 
@@ -12,7 +14,8 @@ export class BootstrapServer {
     }
 
     const express = createExpressServer({
-      controllers: [ __dirname + '/../controllers/**/*.controller.js' ]
+      controllers: [ __dirname + '/../controllers/**/*.controller.js' ],
+      authorizationChecker
     });
 
     this.app = express;

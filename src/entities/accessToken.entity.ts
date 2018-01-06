@@ -13,7 +13,7 @@ export class AccessToken {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column()
+  @Column('text')
   token: string;
 
   @Column('text', { default: '604800' }) // 1 week default

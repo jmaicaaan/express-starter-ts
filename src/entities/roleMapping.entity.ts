@@ -6,7 +6,7 @@ import { Role, User } from '../entities';
 export class RoleMapping {
 
   @PrimaryGeneratedColumn()
-  id: number;
+  id?: number;
 
   @ManyToOne((type) => Role, (role) => role.roleMapping)
   role: Role;

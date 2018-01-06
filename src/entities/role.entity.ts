@@ -2,6 +2,8 @@ import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 
 import { RoleMapping } from '../entities';
 
+import { IRole } from 'enums';
+
 @Entity()
 export class Role {
 
@@ -9,7 +11,7 @@ export class Role {
   id: number;
 
   @Column('text')
-  name: string;
+  name: IRole;
 
   @OneToMany((type) => RoleMapping, (roleMapping) => roleMapping.role)
   roleMapping: RoleMapping[];

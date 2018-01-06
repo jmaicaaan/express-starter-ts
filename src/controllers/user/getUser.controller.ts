@@ -1,4 +1,4 @@
-import { Get, JsonController, QueryParam, QueryParams } from 'routing-controllers';
+import { Authorized, Get, JsonController, QueryParam, QueryParams } from 'routing-controllers';
 import { OrmRepository } from 'typeorm-typedi-extensions';
 
 import { UserRepository } from '../../repositories';
@@ -10,6 +10,7 @@ export class GetUserController {
     @OrmRepository() private userRepository: UserRepository
   ) {}
 
+  @Authorized([ 'Admin' ])
   @Get()
   async execute(
     @QueryParams() query: any
