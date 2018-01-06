@@ -1,7 +1,7 @@
 {
   "name": "express-starter-ts",
-  "version": "0.0.1",
-  "description": "This repository gives the developer an Express Starter Typescript to kick off there development fast",
+  "version": "1.0.0",
+  "description": "This repository gives the developer an Express Starter written in Typescript to kick off there development fast 🔥🔥🔥",
   "main": "index.js",
   "scripts": {
     "test": "cross-env NODE_ENV=test mocha ./dist/tests/*.test.js ./dist/tests/**/*.controller.test.js",
