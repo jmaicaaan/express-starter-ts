@@ -5,6 +5,7 @@ import { bootstrapContainers, bootstrapDB, BootstrapServer } from './utils';
 
 bootstrapContainers();
 
-const app = Container.get(BootstrapServer).bootApp();
+const server = Container.get(BootstrapServer);
+server.startListening();
 
 bootstrapDB();

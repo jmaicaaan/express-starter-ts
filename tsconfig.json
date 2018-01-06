@@ -1,14 +1,15 @@
 {
   "compilerOptions": {
-    "target": "es5",
+    "target": "es2016",
     "module": "commonjs",
     "sourceMap": true,
     "outDir": "./dist",
     "sourceRoot": "src",
+    "baseUrl": "src",
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
     "lib": [
-      "es2015"
+      "es6"
     ]
   },
   "exclude": [
