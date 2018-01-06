@@ -6,5 +6,5 @@
   "password": "sample",
   "database": "sample",
   "synchronize": true,
-  "logging": true
+  "logging": false
 }

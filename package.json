@@ -9,7 +9,7 @@
     "start": "ts-node src/server.ts",
     "build": "tsc --outDir ./dist",
     "watch": "nodemon",
-    "watch:build": "tsc --outDir ./dist && node ./dist/app.js"
+    "watch:build": "npm run build && node ./dist/server.js"
   },
   "repository": {
     "type": "git",
