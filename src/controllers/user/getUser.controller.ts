@@ -10,9 +10,8 @@ export class GetUserController {
     @OrmRepository() private userRepository: UserRepository
   ) {}
 
-  @Authorized([ 'Admin' ])
   @Get()
-  async execute(
+  public async execute(
     @QueryParams() query: any
   ) {
     const users = await this.userRepository.getUsers(query.options);

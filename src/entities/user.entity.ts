@@ -5,24 +5,29 @@ import { AccessToken, RoleMapping } from '../entities';
 @Entity()
 export class User {
 
+  constructor(email: string, password: string) {
+    this.email = email;
+    this.password = password;
+  }
+
   @PrimaryGeneratedColumn()
-  id: number;
+  public id: number;
 
   @Column('text')
-  email: string;
+  public email: string;
 
   @Column('text')
-  password: string;
+  public password: string;
 
   @Column('boolean', { default: true })
-  enabled: boolean;
+  public enabled: boolean;
 
   @Column('timestamp', { default: new Date() })
-  created: Date;
+  public created: Date;
 
   @OneToMany((type) => AccessToken, (accessToken) => accessToken.user)
-  accessToken: AccessToken[];
+  public accessToken: AccessToken[];
 
   @OneToMany((type) => RoleMapping, (roleMapping) => roleMapping.user)
-  roleMapping: RoleMapping[];
+  public roleMapping: RoleMapping[];
 }

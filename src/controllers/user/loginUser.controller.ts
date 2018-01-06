@@ -16,7 +16,7 @@ export class LoginUserController {
   ) {}
 
   @Post()
-  async execute (
+  public async execute (
     @Body() user: User
   ) {
     try {

@@ -6,11 +6,11 @@ import { RoleMapping } from '../entities';
 export class Role {
 
   @PrimaryGeneratedColumn()
-  id: number;
+  public id: number;
 
   @Column('text')
-  name: string;
+  public name: string;
 
   @OneToMany((type) => RoleMapping, (roleMapping) => roleMapping.role)
-  roleMapping: RoleMapping[];
+  public roleMapping: RoleMapping[];
 }

@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "cross-env NODE_ENV=test mocha ./dist/tests/*.test.js ./dist/tests/**/*.controller.test.js",
-    "pretest": "rimraf ./dist && npm run build",
+    "pretest": "tslint src/**/**/*.*.ts rimraf ./dist && npm run build",
     "start": "ts-node src/server.ts",
     "build": "tsc --outDir ./dist",
     "watch": "nodemon",
@@ -43,7 +43,7 @@
     "@types/cookie-parser": "^1.4.1",
     "@types/express": "^4.0.39",
     "@types/lodash": "^4.14.92",
-    "@types/mocha": "^2.2.44",
+    "@types/mocha": "^2.2.46",
     "@types/node": "^8.0.56",
     "chai": "^4.1.2",
     "cross-env": "^5.1.3",

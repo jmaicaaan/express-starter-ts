@@ -19,7 +19,7 @@ export class PostUserController {
   ) {}
 
   @Post()
-  async execute(
+  public async execute(
     @Body() data: { user: User, role: IRole }
   ) {
     try {
@@ -28,7 +28,8 @@ export class PostUserController {
 
       // get the role that will be associate to the user
       const role = await this.roleRepository.findOne({ where: { name: data.role } });
-      await this.roleMappingRepository.addRoleMapping(createdUser, role);
+      const addedRoleMapping = await this.roleMappingRepository.addRoleMapping(createdUser, role);
+      createdUser.roleMapping = [addedRoleMapping];
       return createdUser;
     } catch (error) {
       console.log('error', error);

@@ -11,11 +11,11 @@ export class RoleMapping {
   }
 
   @PrimaryGeneratedColumn()
-  id?: number;
+  public id?: number;
 
   @ManyToOne((type) => Role, (role) => role.roleMapping)
-  role: Role;
+  public role: Role;
 
   @ManyToOne((type) => User, (user) => user.roleMapping)
-  user: User;
+  public user: User;
 }

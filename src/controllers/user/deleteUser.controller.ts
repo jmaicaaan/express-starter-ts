@@ -1,4 +1,4 @@
-import { JsonController, Param, Post } from 'routing-controllers';
+import { Authorized, JsonController, Param, Post } from 'routing-controllers';
 import { OrmRepository } from 'typeorm-typedi-extensions';
 
 import { UserRepository } from '../../repositories';
@@ -10,8 +10,9 @@ export class DeleteUserController {
     @OrmRepository() private userRepository: UserRepository
   ) {}
 
+  @Authorized(['Admin'])
   @Post()
-  async execute(
+  public async execute(
     @Param('id') userId: number
   ) {
     try {

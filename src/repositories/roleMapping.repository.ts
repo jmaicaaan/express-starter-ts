@@ -11,7 +11,9 @@ export class RoleMappingRepository extends Repository<RoleMapping> {
     try {
       if (role) {
         const roleMapping = new RoleMapping(role, user);
-        return this.save(roleMapping);
+        const savedRoleMapping = await this.save(roleMapping);
+        delete savedRoleMapping.user; // remove the user property to avoid circular
+        return savedRoleMapping;
       }
     } catch (error) {
       throw error;

@@ -11,17 +11,17 @@ export class AccessToken {
   }
 
   @PrimaryGeneratedColumn()
-  id: number;
+  public id: number;
 
   @Column('text')
-  token: string;
+  public token: string;
 
   @Column('text', { default: '604800' }) // 1 week default
-  ttl: string;
+  public ttl: string;
 
   @Column('timestamp',  { default: new Date() })
-  created: Date;
+  public created: Date;
 
   @ManyToOne((type) => User, (user) => user.accessToken)
-  user: User;
+  public user: User;
 }
