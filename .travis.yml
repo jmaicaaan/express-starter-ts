@@ -11,3 +11,6 @@ services:
 before_script:
   - npm run setup:config
   - psql -c 'create database sample;' -U postgres
+
+addons:
+  postgresql: "9.4"
