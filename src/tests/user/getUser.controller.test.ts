@@ -6,7 +6,7 @@ import { Connection } from 'typeorm';
 
 import { User } from '../../entities';
 import { IRole } from '../../enums';
-import { App } from '../../libs/app';
+import { App } from '../../utils/app';
 
 const app = Container.get(App).getApp();
 const server = supertest(app);

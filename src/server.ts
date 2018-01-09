@@ -1,7 +1,7 @@
 import { Container } from 'typedi';
 
-import { App } from './libs/app';
-import { Database } from './libs/database';
+import { App } from './utils/app';
+import { Database } from './utils/database';
 
 const port = process.env.PORT || 3000;
 const app = Container.get(App).getApp();
