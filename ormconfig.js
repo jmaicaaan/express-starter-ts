@@ -1,4 +1,5 @@
 
+require('reflect-metadata');
 const env = process.env.NODE_ENV || 'development';
 let config;
 switch (env) {
@@ -12,7 +13,7 @@ switch (env) {
     config = require(__dirname + '/config/ormconfig.json');
       break;
 }
-// config.entities = [ __dirname + '/dist/entities/*.entity.js' ];
+config.entities = [ __dirname + '/dist/entities/*.entity.js' ];
 config.migrations = [ __dirname + '/dist/migrations/*.js' ]
 config.cli = {
   migrationsDir: '/src/migrations/'

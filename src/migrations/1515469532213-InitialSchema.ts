@@ -6,7 +6,7 @@ export class InitialSchema1515469532213 implements MigrationInterface {
       // user table
       await queryRunner.query(`
         CREATE TABLE "user" (
-          id serial primary key NOT NULL,
+          id serial PRIMARY KEY NOT NULL,
           email citext NOT NULL,
           enabled boolean,
           created timestamp with time zone
@@ -15,24 +15,35 @@ export class InitialSchema1515469532213 implements MigrationInterface {
       // role table
       await queryRunner.query(`
         CREATE TABLE "role" (
-          id serial primary key NOT NULL,
+          id serial PRIMARY KEY NOT NULL,
           name character varying(512) NOT NULL
         );
       `)
       // user_role table
       await queryRunner.query(`
         CREATE TABLE "user_role" (
-          id serial NOT NULL,
+          id serial PRIMARY KEY NOT NULL,
           userId integer references "user"(id),
           roleId integer references "role"(id)
+        );
+      `)
+      // access_token table
+      await queryRunner.query(`
+        CREATE TABLE "access_token" (
+          id serial PRIMARY KEY NOT NULL,
+          token character varying(1024) NOT NULL,
+          ttl integer NOT NULL,
+          created timestamp with time zone,
+          userId integer references "user"(id)
         );
       `)
     }
 
     public async down(queryRunner: QueryRunner): Promise<any> {
-      await queryRunner.dropTable('user_role')
-      await queryRunner.dropTable('user');
-      await queryRunner.dropTable('role');
+      await queryRunner.query(`DROP TABLE IF EXISTS "user_role";`);
+      await queryRunner.query(`DROP TABLE IF EXISTS "access_token";`);
+      await queryRunner.query(`DROP TABLE IF EXISTS "user";`);
+      await queryRunner.query(`DROP TABLE IF EXISTS "role";`);
     }
 
 }

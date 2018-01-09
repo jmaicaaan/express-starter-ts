@@ -6,10 +6,9 @@
   "scripts": {
     "test": "cross-env NODE_ENV=test mocha ./dist/tests/*.test.js ./dist/tests/**/*.controller.test.js",
     "pretest": "tslint src/**/**/*.*.ts rimraf ./dist && npm run build",
-    "start": "ts-node src/server.ts",
-    "build": "tsc --outDir ./dist",
-    "watch": "nodemon",
-    "watch:build": "npm run build && node ./dist/server.js"
+    "start": "npm run build && node ./dist/server.js",
+    "build": "rimraf ./dist && tsc --outDir ./dist",
+    "watch": "nodemon"
   },
   "repository": {
     "type": "git",
@@ -40,6 +39,7 @@
   "devDependencies": {
     "@types/bcrypt": "^1.0.0",
     "@types/body-parser": "^1.16.8",
+    "@types/chai": "^4.1.0",
     "@types/cookie-parser": "^1.4.1",
     "@types/express": "^4.0.39",
     "@types/lodash": "^4.14.92",

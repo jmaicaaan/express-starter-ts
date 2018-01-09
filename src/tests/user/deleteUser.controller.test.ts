@@ -87,7 +87,7 @@ describe('#deleteUserController', () => {
       .get('/users/')
       .query({ options })
       .expect(200);
-    expect(findResponse.body).to.have.a.lengthOf(1);
+    expect(findResponse.body).to.have.lengthOf(1);
     expect(findResponse.body).to.be.a('array');
     expect(findResponse.body[0].enabled).to.equal(false);
   });
