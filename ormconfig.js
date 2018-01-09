@@ -1,4 +1,3 @@
-const env = process.env.NODE_ENV || `development`;
 let config;
 try {
   const path = process.cwd() + `/config/ormconfig.${process.env.NODE_ENV}.json`;
