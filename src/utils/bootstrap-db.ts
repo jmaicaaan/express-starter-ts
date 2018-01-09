@@ -17,7 +17,7 @@ export async function bootstrapDB() {
 
   // Get the dist entities - since it cannot understand .ts
   databaseConfig.entities = [ projectRoot + '/dist/entities/*.entity.js' ];
-  connection = await createConnection(databaseConfig);
+  connection = await createConnection();
 
   return connection;
 }
