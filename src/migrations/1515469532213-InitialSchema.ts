@@ -38,6 +38,16 @@ export class InitialSchema1515469532213 implements MigrationInterface {
           "userId" integer references "user"(id)
         );
       `)
+      // access_token table
+      await queryRunner.query(`
+        CREATE TABLE "access_token" (
+          id serial PRIMARY KEY NOT NULL,
+          token character varying(1024) NOT NULL,
+          ttl integer NOT NULL,
+          created timestamp with time zone,
+          userId integer references "user"(id)
+        );
+      `)
     }
 
     public async down(queryRunner: QueryRunner): Promise<any> {
