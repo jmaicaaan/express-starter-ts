@@ -4,6 +4,7 @@ import { Application } from 'express';
 import { createExpressServer, useContainer } from 'routing-controllers';
 import { Container, Service } from 'typedi';
 
+import { authorizationChecker } from '../middlewares/authorization.checker';
 @Service()
 export class App {
 
@@ -19,7 +20,8 @@ export class App {
     useContainer(Container);
     this.application = createExpressServer({
       controllers: [ __dirname + '/../controllers/**/*.controller.js' ],
-      middlewares: [ __dirname + '/../middlewares/*.middleware.js' ]
+      middlewares: [ __dirname + '/../middlewares/*.middleware.js' ],
+      authorizationChecker
     });
     return;
   }

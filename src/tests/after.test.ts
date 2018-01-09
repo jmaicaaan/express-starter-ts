@@ -1,7 +1,9 @@
 import { Container } from 'typedi';
 import { Connection } from 'typeorm';
 
+import { Database } from '../libs/database';
+
 after(async () => {
-  const dbConnection = Container.get(Connection);
-  await dbConnection.close();
+  const database = Container.get(Database);
+  await database.disconnect();
 });

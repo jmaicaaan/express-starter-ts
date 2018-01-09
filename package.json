@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "cross-env NODE_ENV=test mocha ./dist/tests/*.test.js ./dist/tests/**/*.controller.test.js",
-    "pretest": "tslint src/**/**/*.*.ts rimraf ./dist && npm run build",
+    "pretest": "rimraf ./dist && npm run build",
     "start": "npm run build && node ./dist/server.js",
     "build": "rimraf ./dist && tsc --outDir ./dist",
     "watch": "nodemon"

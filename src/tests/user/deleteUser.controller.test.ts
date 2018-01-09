@@ -6,9 +6,9 @@ import { Connection } from 'typeorm';
 
 import { User } from '../../entities';
 import { IRole } from '../../enums';
-import { BootstrapServer } from '../../utils';
+import { App } from '../../libs/app';
 
-const app = Container.get(BootstrapServer).bootApp();
+const app = Container.get(App).getApp();
 const server = supertest(app);
 
 describe('#deleteUserController', () => {
