@@ -5,10 +5,11 @@
   "main": "index.js",
   "scripts": {
     "test": "cross-env NODE_ENV=test mocha ./dist/tests/*.test.js ./dist/tests/**/*.controller.test.js",
-    "pretest": "rimraf ./dist && npm run build",
+    "pretest": "npm run build",
     "start": "npm run build && node ./dist/server.js",
     "build": "rimraf ./dist && tsc --outDir ./dist",
-    "watch": "nodemon"
+    "watch": "nodemon",
+    "migrations:run": "npm run build && typeorm migrations:run"
   },
   "repository": {
     "type": "git",
