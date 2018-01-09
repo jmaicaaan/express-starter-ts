@@ -33,16 +33,6 @@ export class InitialSchema1515469532213 implements MigrationInterface {
         CREATE TABLE "access_token" (
           id serial PRIMARY KEY NOT NULL,
           token character varying(1024) NOT NULL,
-          ttl integer NOT NULL default 604800,
-          created timestamp with time zone,
-          "userId" integer references "user"(id)
-        );
-      `)
-      // access_token table
-      await queryRunner.query(`
-        CREATE TABLE "access_token" (
-          id serial PRIMARY KEY NOT NULL,
-          token character varying(1024) NOT NULL,
           ttl integer NOT NULL,
           created timestamp with time zone,
           userId integer references "user"(id)
