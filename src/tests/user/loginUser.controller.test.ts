@@ -1,11 +1,12 @@
 import 'reflect-metadata';
-import supertest = require('supertest');
+
 import { expect } from 'chai';
 import { Container } from 'typedi';
 import { Connection } from 'typeorm';
+import supertest = require('supertest');
 
 import { IRole } from '../../enums';
-import { App } from '../../utils/app';
+import { App } from '../../utils';
 
 const app = Container.get(App).getApp();
 const server = supertest(app);

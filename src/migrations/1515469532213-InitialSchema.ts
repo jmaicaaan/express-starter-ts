@@ -1,8 +1,11 @@
-import { MigrationInterface, QueryRunner, Table } from "typeorm";
+import { MigrationInterface, QueryRunner, Table } from 'typeorm';
 
 export class InitialSchema1515469532213 implements MigrationInterface {
 
     public async up(queryRunner: QueryRunner): Promise<any> {
+
+      await queryRunner.query(`CREATE EXTENSION IF NOT EXISTS citext`);
+
       // user table
       await queryRunner.query(`
         CREATE TABLE "user" (
@@ -12,14 +15,14 @@ export class InitialSchema1515469532213 implements MigrationInterface {
           enabled boolean default TRUE,
           created timestamp with time zone
         );
-      `)
+      `);
       // role table
       await queryRunner.query(`
         CREATE TABLE "role" (
           id serial PRIMARY KEY NOT NULL,
           name character varying(512) NOT NULL
         );
-      `)
+      `);
       // user_role table
       await queryRunner.query(`
         CREATE TABLE "role_mapping" (
@@ -27,7 +30,7 @@ export class InitialSchema1515469532213 implements MigrationInterface {
           "userId" integer references "user"(id),
           "roleId" integer references "role"(id)
         );
-      `)
+      `);
       // access_token table
       await queryRunner.query(`
         CREATE TABLE "access_token" (
@@ -37,10 +40,11 @@ export class InitialSchema1515469532213 implements MigrationInterface {
           created timestamp with time zone,
           userId integer references "user"(id)
         );
-      `)
+      `);
     }
 
     public async down(queryRunner: QueryRunner): Promise<any> {
+      await queryRunner.query(`DROP EXTENSION IF EXISTS citext`);
       await queryRunner.query(`DROP TABLE IF EXISTS "role_mapping";`);
       await queryRunner.query(`DROP TABLE IF EXISTS "access_token";`);
       await queryRunner.query(`DROP TABLE IF EXISTS "user";`);

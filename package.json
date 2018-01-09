@@ -5,11 +5,12 @@
   "main": "index.js",
   "scripts": {
     "test": "cross-env NODE_ENV=test mocha ./dist/tests/*.test.js ./dist/tests/**/*.controller.test.js",
-    "pretest": "npm run build",
+    "pretest": "tslint src/**/**/*.*.ts rimraf ./dist && npm run build",
     "start": "npm run build && node ./dist/server.js",
     "build": "rimraf ./dist && tsc --outDir ./dist",
     "watch": "nodemon",
-    "migrations:run": "npm run build && typeorm migrations:run"
+    "dbmigrate:up": "npm run build && typeorm migrations:run",
+    "dbmigrate:down": "npm run build && typeorm migrations:revert"
   },
   "repository": {
     "type": "git",
