@@ -12,5 +12,9 @@ switch (env) {
     config = require(__dirname + '/config/ormconfig.json');
       break;
 }
-config.entities = [ __dirname + '/dist/entities/*.entity.js'];
+config.entities = [ __dirname + '/dist/entities/*.entity.js' ];
+config.migrations = [ __dirname + '/dist/migrations/*.js' ]
+config.cli = {
+  migrationsDir: '/src/migrations/'
+}
 module.exports = config;
