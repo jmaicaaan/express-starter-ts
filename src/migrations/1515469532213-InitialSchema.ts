@@ -44,11 +44,11 @@ export class InitialSchema1515469532213 implements MigrationInterface {
     }
 
     public async down(queryRunner: QueryRunner): Promise<any> {
-      await queryRunner.query(`DROP EXTENSION IF EXISTS citext`);
       await queryRunner.query(`DROP TABLE IF EXISTS "access_token";`);
-      await queryRunner.query(`DROP TABLE IF EXISTS "user" CASCADE;`);
-      await queryRunner.query(`DROP TABLE IF EXISTS "role";`);
       await queryRunner.query(`DROP TABLE IF EXISTS "role_mapping"`);
+      await queryRunner.query(`DROP TABLE IF EXISTS "role";`);
+      await queryRunner.query(`DROP TABLE IF EXISTS "user";`);
+      await queryRunner.query(`DROP EXTENSION IF EXISTS citext`);
     }
 
 }
