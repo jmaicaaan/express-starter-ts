@@ -10,7 +10,8 @@
     "build": "rimraf ./dist && tsc --outDir ./dist",
     "watch": "nodemon",
     "dbmigrate:up": "npm run build && typeorm migrations:run",
-    "dbmigrate:down": "npm run build && typeorm migrations:revert"
+    "dbmigrate:down": "npm run build && typeorm migrations:revert",
+    "dbmigrate:create": "typeorm migrations:create -n"
   },
   "repository": {
     "type": "git",
