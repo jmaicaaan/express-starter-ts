@@ -36,19 +36,19 @@ export class InitialSchema1515469532213 implements MigrationInterface {
         CREATE TABLE "access_token" (
           id serial PRIMARY KEY NOT NULL,
           token character varying(1024) NOT NULL,
-          ttl integer NOT NULL,
+          ttl integer NOT NULL DEFAULT 604800,
           created timestamp with time zone,
-          userId integer references "user"(id)
+          "userId" integer references "user"(id)
         );
       `);
     }
 
     public async down(queryRunner: QueryRunner): Promise<any> {
       await queryRunner.query(`DROP EXTENSION IF EXISTS citext`);
-      await queryRunner.query(`DROP TABLE IF EXISTS "role_mapping";`);
       await queryRunner.query(`DROP TABLE IF EXISTS "access_token";`);
-      await queryRunner.query(`DROP TABLE IF EXISTS "user";`);
+      await queryRunner.query(`DROP TABLE IF EXISTS "user" CASCADE;`);
       await queryRunner.query(`DROP TABLE IF EXISTS "role";`);
+      await queryRunner.query(`DROP TABLE IF EXISTS "role_mapping"`);
     }
 
 }

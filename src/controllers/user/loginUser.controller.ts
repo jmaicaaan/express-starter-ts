@@ -8,7 +8,7 @@ import { BcryptService, CryptoService } from '../../services';
 @JsonController('/login')
 export class LoginUserController {
 
-  constructor (
+  constructor(
     @OrmRepository() private userRepository: UserRepository,
     @OrmRepository() private accessTokenRepository: AccessTokenRepository,
     private bcryptService: BcryptService,
@@ -16,7 +16,7 @@ export class LoginUserController {
   ) {}
 
   @Post()
-  public async execute (
+  public async execute(
     @Body() user: User
   ) {
     try {

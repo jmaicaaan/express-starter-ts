@@ -5,8 +5,8 @@ export class InitialSeed1515482851107 implements MigrationInterface {
     public async up(queryRunner: QueryRunner): Promise<any> {
       // seed role table
       await queryRunner.query(`
-        INSERT INTO "role"
-          VALUES (1, 'Admin');
+        INSERT INTO "role"(name)
+          VALUES ('Admin');
       `);
     }
 
