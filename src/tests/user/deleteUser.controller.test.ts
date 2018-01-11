@@ -1,14 +1,16 @@
 import 'reflect-metadata';
+
 import supertest = require('supertest');
+
 import { expect } from 'chai';
 import { Container } from 'typedi';
 import { Connection } from 'typeorm';
 
 import { User } from '../../entities';
 import { IRole } from '../../enums';
-import { BootstrapServer } from '../../utils';
+import { App } from '../../utils';
 
-const app = Container.get(BootstrapServer).bootApp();
+const app = Container.get(App).getApp();
 const server = supertest(app);
 
 describe('#deleteUserController', () => {
@@ -87,7 +89,7 @@ describe('#deleteUserController', () => {
       .get('/users/')
       .query({ options })
       .expect(200);
-    expect(findResponse.body).to.have.a.lengthOf(1);
+    expect(findResponse.body).to.have.lengthOf(1);
     expect(findResponse.body).to.be.a('array');
     expect(findResponse.body[0].enabled).to.equal(false);
   });

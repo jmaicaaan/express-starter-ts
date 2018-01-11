@@ -16,8 +16,8 @@ export class AccessToken {
   @Column('text')
   public token: string;
 
-  @Column('text', { default: '604800' }) // 1 week default
-  public ttl: string;
+  @Column('integer', { default: 604800 }) // 1 week default
+  public ttl: number;
 
   @Column('timestamp',  { default: new Date() })
   public created: Date;
