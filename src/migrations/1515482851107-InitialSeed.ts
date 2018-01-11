@@ -16,12 +16,14 @@ export class InitialSeed1515482851107 implements MigrationInterface {
       `);
 
       await queryRunner.query(`
+        INSERT INTO role_mapping ("userId", "roleId")
         SELECT u.id, r.id from
           ( SELECT id from "user" where email='admin@example.com' ) as u,
             ( SELECT id from "role" where name='Admin') as r
       `);
 
       await queryRunner.query(`
+        INSERT INTO role_mapping ("userId", "roleId")
         SELECT u.id, r.id from
           ( SELECT id from "user" where email='user@example.com' ) as u,
             ( SELECT id from "role" where name='User') as r
