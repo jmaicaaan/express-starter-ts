@@ -4,10 +4,11 @@ node_js:
 cache:
   directories:
     - "node_modules"
-
+env:
+  - NODE_ENV=test
 services:
   - postgresql
 
 before_script:
   - npm run setup:config
-  - psql -c 'create database sample;' -U postgres
+  - psql -c 'create database sample-testnpm;' -U postgres
