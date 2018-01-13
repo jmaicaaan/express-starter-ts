@@ -6,7 +6,7 @@ This repository gives the developer an Express Starter Typescript to kick off th
   - This is inspired from the [Java - Struts Framework](https://javabeat.net/introduction-to-struts-actions/) which we customized to make an opinionated starter pack for the developer to kick off there development fast.
   - We also promote the `Single Responsibility` principle as we believe that it will be easier to maintain and provide unit tests when it scales up.
 
-    ![alt text](./images/flow.jpg)
+    ![flow](https://jmaicaaan.github.io/express-starter-ts/images/flow.jpg)
 
 # Entity
   - An entity represents the instance what will be saved into your database.
