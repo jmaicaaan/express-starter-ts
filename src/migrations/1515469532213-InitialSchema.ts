@@ -4,7 +4,7 @@ export class InitialSchema1515469532213 implements MigrationInterface {
 
     public async up(queryRunner: QueryRunner): Promise<any> {
 
-      await queryRunner.query(`CREATE EXTENSION IF NOT EXISTS citext`);
+      // await queryRunner.query(`CREATE EXTENSION IF NOT EXISTS citext`);
 
       // user table
       await queryRunner.query(`
@@ -48,7 +48,7 @@ export class InitialSchema1515469532213 implements MigrationInterface {
       await queryRunner.query(`DROP TABLE IF EXISTS "role_mapping"`);
       await queryRunner.query(`DROP TABLE IF EXISTS "role";`);
       await queryRunner.query(`DROP TABLE IF EXISTS "user";`);
-      await queryRunner.query(`DROP EXTENSION IF EXISTS citext`);
+      // await queryRunner.query(`DROP EXTENSION IF EXISTS citext`);
     }
 
 }
