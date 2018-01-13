@@ -11,6 +11,7 @@
     "variable-name": ["check-format", "allow-leading-underscore"],
     "member-access": true,
     "member-ordering": false,
-    "no-implicit-dependencies": false
+    "no-implicit-dependencies": false,
+    "no-submodule-imports": true
   }
 }

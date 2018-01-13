@@ -8,7 +8,7 @@ export class AccessTokenRepository extends Repository<AccessToken> {
 
   public async addAccessToken(token: string, user: User): Promise<AccessToken> {
     try {
-      let accessToken = new AccessToken(token, user);
+      const accessToken = new AccessToken(token, user);
       return this.save(accessToken);
     } catch (error) {
       console.log('error', error);

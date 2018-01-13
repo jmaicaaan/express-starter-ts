@@ -1,8 +1,7 @@
-import { Service } from 'typedi';
+import { Container, Service } from 'typedi';
 import { EntityRepository, FindManyOptions, Repository } from 'typeorm';
 import { OrmRepository } from 'typeorm-typedi-extensions';
 
-import { Container } from 'typedi/Container';
 import { Role, User } from '../entities';
 
 @EntityRepository(User)
@@ -20,7 +19,7 @@ export class UserRepository extends Repository<User> {
   }
 
   public async deleteUserById(id: number): Promise<void> {
-    return await this.updateById(id, { enabled: false });
+    return this.updateById(id, { enabled: false });
   }
 
   public async getUserRolesById(id: number): Promise<Role[]> {
@@ -37,7 +36,7 @@ export class UserRepository extends Repository<User> {
         roles = user.roleMapping.map((r) => r.role);
         return roles;
       }
-      throw `No role associated to userId ${id}`;
+      throw new Error(`No role associated to userId ${id}`);
     } catch (error) {
       throw error;
     }
@@ -45,7 +44,7 @@ export class UserRepository extends Repository<User> {
 
   public async getUserByToken(token: string): Promise<User> {
     if (!token) {
-      throw 'No access token received';
+      throw new Error('No access token received');
     }
     const queryBuilder = this.createQueryBuilder('user')
       .innerJoinAndSelect('user.accessToken', 'accessToken')
