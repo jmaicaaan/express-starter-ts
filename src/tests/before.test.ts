@@ -1,10 +1,9 @@
-import { Container } from 'typedi/Container';
+import { Container } from 'typedi';
 import { Connection } from 'typeorm';
 
-import { bootstrapContainers, bootstrapDB, BootstrapServer } from '../utils';
+import { Database } from '../utils';
 
 before(async () => {
-  bootstrapContainers();
-  const app = Container.get(BootstrapServer).bootApp();
-  Container.set(Connection, await bootstrapDB());
+  const database = Container.get(Database);
+  await database.connect();
 });

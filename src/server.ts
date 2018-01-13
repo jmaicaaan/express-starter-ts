@@ -1,11 +1,13 @@
-import 'reflect-metadata';
 import { Container } from 'typedi';
 
-import { bootstrapContainers, bootstrapDB, BootstrapServer } from './utils';
+import { App, Database } from './utils';
 
-bootstrapContainers();
+const port = process.env.PORT || 3000;
+const app = Container.get(App).getApp();
 
-const server = Container.get(BootstrapServer);
-server.startListening();
+const database = Container.get(Database);
+database.connect();
 
-bootstrapDB();
+app.listen(port, () => {
+  console.log(`server listening at http://localhost:${port}`);
+});
