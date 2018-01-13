@@ -9,7 +9,7 @@ This repository gives the developer an Express Starter Typescript to kick off th
 # Documentation
   - The definitions that we set to the different parts of our structure. With that, we will discuss what is `command design pattern` and why do we use it.
 
-    ![alt text](https://lh5.googleusercontent.com/V8usgj_sSBb9RzgU6EcjRdprjX1rGjYhroxtsMdibiQQbmq26rlrCeNRNg05JYRvCB7swgKQk7-huKya4XNE=w1891-h1240)
+    ![alt text](https://jmaicaaan.github.io/express-starter-ts/images/flow.jpg)
 
 # Entity
   - What is an entity? An entity represents the instance what will be saved into your database. An entity is like a table instance to your database.
