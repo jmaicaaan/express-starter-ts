@@ -10,6 +10,7 @@ services:
   - postgresql
 
 before_script: 
-  - npm run sh
+  - npm run setup:config
+  - bash ./src/scripts/before.travis.script.sh
 addons:
   postgresql: "9.4"
