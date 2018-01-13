@@ -12,7 +12,8 @@
     "setup:config": "gulp createTravisOrmConfig",
     "dbmigrate:up": "npm run build && typeorm migrations:run",
     "dbmigrate:down": "npm run build && typeorm migrations:revert",
-    "dbmigrate:create": "typeorm migrations:create -n"
+    "dbmigrate:create": "typeorm migrations:create -n",
+    "sh": "npm run setup:config && bash src/scripts/before.travis.script.sh"
   },
   "repository": {
     "type": "git",
