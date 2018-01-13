@@ -9,7 +9,7 @@
     "start": "npm run build && node ./dist/server.js",
     "build": "rimraf ./dist && tsc --outDir ./dist",
     "watch": "nodemon",
-    "setup:config": "gulp createTravisOrmConfig",
+    "setup:config": "gulp createTravisBeforeScript",
     "dbmigrate:up": "npm run build && typeorm migrations:run",
     "dbmigrate:down": "npm run build && typeorm migrations:revert",
     "dbmigrate:create": "typeorm migrations:create -n"

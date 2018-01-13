@@ -99,7 +99,7 @@ gulp.task('add-entity', ['create-file-entity'], () => {
     .pipe(gulp.dest(destinationPath));
 });
 
-gulp.task('createTravisOrmConfig', [], () => {
+gulp.task('createTravisBeforeScript', [], () => {
   const name = 'before.travis';
 
   fileCreator(mainFolder.scripts, name, generatorPaths.scripts, {
