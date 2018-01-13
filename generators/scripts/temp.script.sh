@@ -1,2 +1,2 @@
-#!/usr/bin/env bash
+#!/bin/sh
 psql -U postgres -c "CREATE DATABASE <%= databaseName %>;"
