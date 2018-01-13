@@ -10,7 +10,7 @@ export class InitialSchema1515469532213 implements MigrationInterface {
       await queryRunner.query(`
         CREATE TABLE "user" (
           id serial PRIMARY KEY NOT NULL,
-          email citext NOT NULL,
+          email text NOT NULL,
           password character varying(1024) NOT NULL,
           enabled boolean default TRUE,
           created timestamp with time zone
