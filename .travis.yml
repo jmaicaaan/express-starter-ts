@@ -13,7 +13,7 @@ before_script:
   - npm run setup:config
   - psql -U postgres -c "CREATE DATABASE sample_test"
   - psql -U postgres -c "CREATE USER sample WITH PASSWORD 'password'"
-  - psql -U postgres -c GRANT ALL PRIVILEGES ON DATABASE sample_test TO sample;"
+  - psql -U postgres -c "GRANT ALL PRIVILEGES ON DATABASE sample_test TO sample;"
 addons:
   postgresql: "9.4"
 
