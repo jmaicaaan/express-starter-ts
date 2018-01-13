@@ -5,16 +5,20 @@ const gulpInsert = require('gulp-insert');
 const path = require('path');
 const yargs = require('yargs');
 
+const ormTestConfig = require('./config/ormconfig.test.json');
+
 const root = 'src';
 const generatorPaths = {
   controllers: path.join(__dirname, 'generators', 'controllers/*.**'),
   entities: path.join(__dirname, 'generators', 'entities/*.**'),
-  middlewares: path.join(__dirname, 'generators', 'middlewares/*.**')
+  middlewares: path.join(__dirname, 'generators', 'middlewares/*.**'),
+  scripts: path.join(__dirname, 'generators', 'scripts/*.**')
 };
 const mainFolder = {
   controllers: 'controllers',
   entities: 'entities',
-  middlewares: 'middlewares'
+  middlewares: 'middlewares',
+  scripts: 'scripts'
 };
 
 function pathResolver(mainFolder) {
@@ -64,9 +68,9 @@ gulp.task('create-file-entity', [], () => {
 
 gulp.task('add-controller', ['create-file-controller'], () => {
   const name = yargs.argv.name;
-  const destinationPath = path.join(pathResolver(mainFolder.controller));
+  const destinationPath = path.join(pathResolver(mainFolder.controllers));
   const line = `\nexport { ${capName(name)} } from './${name}/${name}.controller';`
-  const rootFile = path.join(pathResolver(mainFolder.controller), 'index.ts');
+  const rootFile = path.join(pathResolver(mainFolder.controllers), 'index.ts');
 
   return gulp.src(rootFile)
     .pipe(gulpInsert.append(line))
@@ -96,7 +100,11 @@ gulp.task('add-entity', ['create-file-entity'], () => {
 });
 
 gulp.task('createTravisOrmConfig', [], () => {
-  return gulp.src('./config/ormconfig.test.json')
-      .pipe(gulpRename('ormconfig.yml.travis'))
-      .pipe(gulp.dest('./'));
+  const name = 'before.travis';
+
+  fileCreator(mainFolder.scripts, name, generatorPaths.scripts, {
+    databaseName: ormTestConfig.database,
+    username: ormTestConfig.username,
+    password: ormTestConfig.password
+  }, true);
 });
