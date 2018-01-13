@@ -58,6 +58,7 @@
     "gulp-template": "^4.0.0",
     "rimraf": "^2.6.2",
     "supertest": "^3.0.0",
+    "tslint": "^5.9.1",
     "yargs": "^10.0.3"
   }
 }
