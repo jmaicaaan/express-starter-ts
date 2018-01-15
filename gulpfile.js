@@ -99,12 +99,25 @@ gulp.task('add-entity', ['create-file-entity'], () => {
     .pipe(gulp.dest(destinationPath));
 });
 
-gulp.task('createTravisBeforeScript', [], () => {
-  const name = 'before.travis';
+function createTravisConfig(lifecycle) {
+  if (lifecycle) {
+    switch (lifecycle) {
+      case 'BEFORE_SCRIPT': 
+        const name = 'before.travis';
+        fileCreator(mainFolder.scripts, name, generatorPaths.scripts, {
+          databaseName: ormTestConfig.database,
+          username: ormTestConfig.username,
+          password: ormTestConfig.password
+        }, true);
+        break;
+      default:
+        throw 'No travis lifecycle defined. See https://docs.travis-ci.com/user/customizing-the-build/ for more.'    
+    }
+  } else {
+    throw 'No travis lifecycle defined. See https://docs.travis-ci.com/user/customizing-the-build/ for more.'
+  }
+}
 
-  fileCreator(mainFolder.scripts, name, generatorPaths.scripts, {
-    databaseName: ormTestConfig.database,
-    username: ormTestConfig.username,
-    password: ormTestConfig.password
-  }, true);
+gulp.task('setup-config', [], () => {
+  createTravisConfig('BEFORE_SCRIPT');
 });
