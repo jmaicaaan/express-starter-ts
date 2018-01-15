@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/jmaicaaan/express-starter-ts.svg?branch=master)](https://travis-ci.org/jmaicaaan/express-starter-ts)
+
 # express-starter-ts
 This repository gives the developer an Express Starter Typescript to kick off there development fast
 
