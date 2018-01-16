@@ -11,7 +11,7 @@ services:
 
 before_script: 
   - npm run setup:config
-  - chmod +x ./src/scripts/before.travis.script.sh && ./src/scripts/before.travis.script.sh
+  - chmod +x ./src/scripts/before.travis.script.sh && bash ./src/scripts/before.travis.script.sh
 
 after_success:
   - rm ./src/scripts/before.travis.script.sh
