@@ -7,12 +7,17 @@ import { Container } from 'typedi';
 import { Connection } from 'typeorm';
 
 import { IRole } from '../../enums';
-import { App } from '../../utils';
+import { App, Database } from '../../utils';
 
 const app = Container.get(App).getApp();
+const database = Container.get(Database);
 const server = supertest(app);
 
 describe('#postUserController', () => {
+
+  before(async () => {
+    await database.reset();
+  });
 
   it('add a user', async () => {
     const response = await server

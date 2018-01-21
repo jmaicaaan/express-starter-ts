@@ -22,6 +22,19 @@ export class Database {
     }
   }
 
+  public executeSQL(sql: string, ...params: any[]): Promise<any> {
+   return this.connection.createQueryRunner()
+      .query(sql, params);
+  }
+
+  public async reset() {
+    if (process.env.NODE_ENV === 'test') {
+      await this.connection.dropDatabase();
+      return this.connection.runMigrations();
+    }
+    throw new Error('Reset database can only be done in test environment');
+  }
+
   private async bootstrap(): Promise<void> {
     if (this.connection) {
       return;

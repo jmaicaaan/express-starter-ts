@@ -8,15 +8,19 @@ import { Connection } from 'typeorm';
 
 import { User } from '../../entities';
 import { IRole } from '../../enums';
-import { App } from '../../utils';
+import { App, Database } from '../../utils';
 
 const app = Container.get(App).getApp();
+const database = Container.get(Database);
 const server = supertest(app);
 
 describe('#getUserController', () => {
 
   let createdUser: User;
   before(async () => {
+
+    await database.reset();
+
     const response = await server
       .post('/users/')
       .send({
