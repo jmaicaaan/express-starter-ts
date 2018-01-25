@@ -1,72 +1,67 @@
 [![Build Status](https://travis-ci.org/jmaicaaan/express-starter-ts.svg?branch=master)](https://travis-ci.org/jmaicaaan/express-starter-ts)
 
 # express-starter-ts
-This repository gives the developer an Express Starter Typescript to kick off there development fast
+This repository gives the developer an Express Starter written in Typescript to kick off there development fast 🔥🔥🔥
+
+This is inspired from the [Java - Struts Framework](https://javabeat.net/introduction-to-struts-actions/) which we customized to make an opinionated starter pack for the developer to kick off there development fast.
+
+We also promote the `Single Responsibility` principle as we believe that it will be easier to maintain and provide unit tests when it scales up.
+
+  ![flow](https://jmaicaaan.github.io/express-starter-ts/images/flow.jpg)
+
+# Getting Started
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
+
+# Prerequisites
+- Node 8.4.0 or higher (you can try to manage your versions using [nvm](https://github.com/creationix/nvm))
+# Installing
+- Set up your database and make sure you change the config to your own setup. You can find your database config under `config/ormconfig.json` for your development environment. Change accordingly to your chosen environment (test/production)
+
+      {
+        "type": "postgres",
+        "host": "localhost",
+        "port": 5432,
+        "username": "sample",
+        "password": "sample",
+        "database": "sample",
+        "logging": false
+      }
+
+    For more info like supported database driver visit [TypeORM](https://github.com/typeorm/typeorm).
 
 
-# Overview
-  - This is inspired from the [Java - Struts Framework](https://javabeat.net/introduction-to-struts-actions/) which we customized to make an opinionated starter pack for the developer to kick off there development fast.
-  - We also promote the `Single Responsibility` principle as we believe that it will be easier to maintain and provide unit tests when it scales up.
+- And start your application by running this in the terminal. This would watch for changes and rebuild(transpiled) your application
 
-    ![flow](https://jmaicaaan.github.io/express-starter-ts/images/flow.jpg)
+      npm run watch
 
-# Entity
-  - An entity represents the instance what will be saved into your database.
-  - The entity in short will be your database table.
-  - The entity folder will be located in the `project-folder-root/src/entites`
-  - To create an entity, go to the terminal and type in:
-    > `gulp entity --name User` See more [generators](#generators)
+With that, you can see in your terminal that the app is ready to listen for requests. For example:
 
-# Controllers
-  - The controller is the one responsible to process your request and release the response to the client.
-  - Every module will have corresponding controllers such as the `User` will have the `getUserController`, `addUserController`, `deleteUserController`, `updateUserController`. Each controller will have an `execute()` method that is decorated by an http verb. **The controller cannot contain multiple methods decorated by an http verb (eg: @Get, @Post, @Put, @Delete)**
-  - Correct way
-
-        @JsonController('/sample')
-        class SampleController {
-
-          constructor(
-            @OrmRepository() private sampleRepository: SampleRepository
-          )
-
-          @Get()
-          public execute() {
-            return this.sampleRepository.getData();
-          }
-        }
-
-  - Wrong way - It does not follow the `Single Responsibility` principle
-
-        @JsonController('/sample')
-        class SampleController {
-
-          constructor(
-            @OrmRepository() private sampleRepository: SampleRepository
-          )
-
-          @Get()
-          public execute() {
-            return this.sampleRepository.getData();
-          }
-
-          @Get()
-          public getABC() {
-            return this.sampleRepository.getABC();
-          }
-        }
-
-  - To create an entity, go to the terminal and type in:
-    > `gulp add-controller --name getUser` See more [generators](#generators)
-
-# Repositories
-  - The repository is the one responsible for communicating with the database with specific validations and nothing else! A repository extends the Repository class provide by the typeorm. **The repository file can contain multiple methods but each method is doing only one thing.**
-  - The repository will be injected into a controller in order to communicate to the database. It is the responsibility of the repository to communicate to the database.
-
-# Services
-  - A service is similar to repositories but instead of communicating to database it communicates to other 3rd party libraries (nodemailer, bcrypt, etc). It creates an abstraction to the 3rd party libraries to be injectable in the application. **The service file can contain multiple methods but each method is doing only one thing.**
-  - The service will be injected into a controller that communicate to the other libraries. Basically its a class that has methods.
+    server listening at http://localhost:3000
 
 
-# Generators
-  - To create a controller, you can use the generator gulp command as `gulp add-controller --name controllerName`. After generating, import it into `app.ts`
-  - The naming convention is **camelCase** and always `http verb` + `entity name`
+# Running the tests
+
+To run the test suites, type in your terminal
+
+    npm run test
+
+Take note that you need to change your database config for **test** environment. See [installing](#Installing) on how to setup database.
+
+
+# Built With
+- [Routing controllers](https://github.com/typestack/routing-controllers) - Web framework
+- [TypeORM](https://github.com/typeorm/typeorm) - Database Management
+- [TypeDI](https://github.com/typestack/typedi) - Dependencies injection
+
+# Contributing
+Open for pull requests!
+
+# Versioning
+We use [SemVer](https://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/jmaicaaan/express-starter-ts/tags)
+
+# Authors
+- [JM Santos](https://github.com/jmaicaaan)
+- [Cedrick Mandocdoc](https://github.com/ciiidi)
+
+# Acknowledgments
+- Hands down for the great works of [pleerock](https://github.com/pleerock)
