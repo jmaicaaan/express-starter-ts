@@ -21,7 +21,7 @@ describe('#loginUserController', () => {
     await database.reset();
 
     const response = await server
-      .post('/users/')
+      .post('/api/users/')
       .send({
         user: {
           email: 'test-user-' + Date.now(),
@@ -35,7 +35,7 @@ describe('#loginUserController', () => {
 
   it('should login a user and receive an accessToken', async () => {
     const response = await server
-      .post('/login')
+      .post('/api/login')
       .send({
         email: createdUser.email,
         password: 'password123'

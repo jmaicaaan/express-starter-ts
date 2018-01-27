@@ -21,7 +21,7 @@ describe('#postUserController', () => {
 
   it('add a user', async () => {
     const response = await server
-      .post('/users/')
+      .post('/api/users/')
       .send({
         user: {
           email: 'test-user-' + Date.now(),

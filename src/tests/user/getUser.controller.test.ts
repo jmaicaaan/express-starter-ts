@@ -22,7 +22,7 @@ describe('#getUserController', () => {
     await database.reset();
 
     const response = await server
-      .post('/users/')
+      .post('/api/users/')
       .send({
         user: {
           email: 'test-user-' + Date.now(),
@@ -37,13 +37,13 @@ describe('#getUserController', () => {
   it('get all users', async () => {
     const options = { where: { id: 1 } };
     const response = await server
-      .get('/users/')
+      .get('/api/users/')
       .expect(200);
   });
   it('should get user by id', async () => {
     const options = { where: { id: createdUser.id } };
     const response = await server
-      .get('/users/')
+      .get('/api/users/')
       .set('Authorization', '3efd9ced2f840576a5f638a030fa84')
       .query({ options })
       .expect(200);
