@@ -28,7 +28,7 @@ describe('#deleteUserController', () => {
     let response;
 
     response = await server
-      .post('/users/')
+      .post('/api/users/')
       .send({
         user: {
           email: 'test-user-' + Date.now(),
@@ -40,7 +40,7 @@ describe('#deleteUserController', () => {
     createdAdmin = response.body;
 
     response = await server
-      .post('/login/')
+      .post('/api/login/')
       .send({
         email: createdAdmin.email,
         password: 'password123'
@@ -49,7 +49,7 @@ describe('#deleteUserController', () => {
     adminAccessToken = response.body.token;
 
     response = await server
-      .post('/users/')
+      .post('/api/users/')
       .send({
         user: {
           email: 'test-user-' + Date.now(),
@@ -61,7 +61,7 @@ describe('#deleteUserController', () => {
     createdUser = response.body;
 
     response = await server
-      .post('/login/')
+      .post('/api/login/')
       .send({
         email: createdUser.email,
         password: 'password123'
@@ -72,25 +72,25 @@ describe('#deleteUserController', () => {
 
   it('ACL - should not allow unauthorized to delete a user', () => {
     return server
-      .post('/users/' + createdUser.id)
+      .post('/api/users/' + createdUser.id)
       .expect(403);
   });
 
   it('ACL - should not allow user role to delete a user', () => {
     return server
-      .post('/users/' + createdUser.id)
+      .post('/api/users/' + createdUser.id)
       .set('Authorization', userAccessToken)
       .expect(403);
   });
 
   it('should delete a user', async () => {
     const response = await server
-      .post('/users/' + createdAdmin.id)
+      .post('/api/users/' + createdAdmin.id)
       .set('Authorization', adminAccessToken)
       .expect(200);
     const options = { where: { id: createdAdmin.id } };
     const findResponse = await server
-      .get('/users/')
+      .get('/api/users/')
       .query({ options })
       .expect(200);
     expect(findResponse.body).to.have.lengthOf(1);

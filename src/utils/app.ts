@@ -26,6 +26,7 @@ export class App {
     useContainer(Container);
 
     this.application = createExpressServer({
+      routePrefix: '/api',
       controllers: [ __dirname + '/../controllers/**/*.controller.js' ],
       middlewares: [ __dirname + '/../middlewares/*.middleware.js' ],
       authorizationChecker
