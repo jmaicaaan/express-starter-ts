@@ -7,7 +7,7 @@
     "build": "rimraf ./dist && tsc",
     "start": "npm run build && node ./dist/server.js",
     "unit:test": "cross-env NODE_ENV=test npm run build && mocha ./dist/database/repositories/*.test.js",
-    "e2e:test": "cross-env NODE_ENV=test npm run build && mocha ./dist/app/controllers/*.test.js"
+    "e2e:test": "cross-env NODE_ENV=test npm run build && mocha ./dist/app/controllers/**/*.test.js"
   },
   "repository": {
     "type": "git",

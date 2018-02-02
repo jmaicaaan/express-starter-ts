@@ -2,7 +2,7 @@ import * as commander from 'commander';
 import { exec } from 'shelljs';
 import { Container } from 'typedi';
 
-import { Database } from './services/database.service';
+import { Database } from './database/database';
 
 const db = Container.get(Database);
 

@@ -1,25 +1,28 @@
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn  } from 'typeorm';
+import { Column, Entity, JoinTable, ManyToMany, PrimaryGeneratedColumn  } from 'typeorm';
+
+import { Role } from './role.entity';
 
 @Entity()
 export class User {
 
-  constructor(email: string, password: string) {
-    this.email = email;
-    this.password = password;
-  }
-
   @PrimaryGeneratedColumn()
-  public id: number;
+  public id?: number;
 
   @Column('text')
-  public email: string;
+  public email?: string;
 
   @Column('text')
-  public password: string;
+  public password?: string;
 
   @Column('boolean', { default: true })
-  public enabled: boolean;
+  public enabled?: boolean;
 
   @Column('timestamp', { default: new Date() })
-  public created: Date;
+  public created?: Date;
+
+  @ManyToMany((type) => Role)
+  @JoinTable({
+    name: 'user_roles'
+  })
+  public roles?: Role[];
 }

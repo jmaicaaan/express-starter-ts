@@ -1,7 +1,7 @@
 import { Container } from 'typedi';
 
-import { App } from './services/app.service';
-import { Database } from './services/database.service';
+import { App } from './app/app';
+import { Database } from './database/database';
 
 (async () => {
   const port = 8000 || process.env.PORT;

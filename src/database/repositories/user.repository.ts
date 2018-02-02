@@ -14,4 +14,8 @@ export class UserRepository extends Repository<User> {
   public async getUserById(id: number): Promise<User> {
     return this.findOneById(id);
   }
+
+  public async createUser(user: User): Promise<User> {
+    return this.save(user);
+  }
 }

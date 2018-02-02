@@ -2,8 +2,8 @@ import { expect, request, use } from 'chai';
 import { Container } from 'typedi';
 use(require('chai-http'));
 
-import { App } from '../../services/app.service';
-import { Database } from '../../services/database.service';
+import { Database } from '../../../database/database';
+import { App } from '../../app';
 
 describe('e2e test: user controller', async () => {
 
@@ -19,7 +19,11 @@ describe('e2e test: user controller', async () => {
     await db.disconnect();
   });
 
-  it('should get all list of users', async () => {
-    await server.get('/api/users');
+  it('should create user with role', async () => {
+    await server.post('/api/users').send({
+      email: 'test',
+      password: 'test',
+      roles: [{ name: 'admin' }]
+    });
   });
 });
