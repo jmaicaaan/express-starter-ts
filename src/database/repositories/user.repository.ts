@@ -4,10 +4,14 @@ import { User } from '../entities/user.entity';
 @EntityRepository(User)
 export class UserRepository extends Repository<User> {
 
-  public getUsers(options?: FindManyOptions<User>): Promise<User[]> {
+  public async getUsers(options?: FindManyOptions<User>): Promise<User[]> {
     if (!options) {
       options = {};
     }
     return this.find(options);
+  }
+
+  public async getUserById(id: number): Promise<User> {
+    return this.findOneById(id);
   }
 }

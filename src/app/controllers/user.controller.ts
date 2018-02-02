@@ -12,8 +12,14 @@ export class UserController {
   ) {}
 
   @Get('/users')
-  public async getUsers(@Req() request: Request, @Res() response: Response) {
+  public async getUsers() {
     const users = await this.userRepository.getUsers({});
-    return response.send(users);
+    return users;
+  }
+
+  @Get('/users/:id')
+  public async getUserById(@Param('id') id: number) {
+    const user = await this.userRepository.getUserById(id);
+    return user;
   }
 }
