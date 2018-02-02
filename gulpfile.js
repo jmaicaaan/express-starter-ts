@@ -7,102 +7,71 @@ const yargs = require('yargs');
 
 const ormTestConfig = require('./config/ormconfig.test.json');
 
-const root = 'src';
 const generatorPaths = {
-  controllers: path.join(__dirname, 'generators', 'controllers/*.**'),
-  entities: path.join(__dirname, 'generators', 'entities/*.**'),
-  middlewares: path.join(__dirname, 'generators', 'middlewares/*.**'),
-  scripts: path.join(__dirname, 'generators', 'scripts/*.**')
+  entities: __dirname + '/generators/entities/*.**',
+  repositories: __dirname + '/generators/repositories/*.**',
+  scripts: __dirname + '/generators/scripts/*.**'
 };
 const mainFolder = {
-  controllers: 'controllers',
-  entities: 'entities',
-  middlewares: 'middlewares',
-  scripts: 'scripts'
+  entities:  __dirname + '/src/database/entities',
+  repositories: __dirname + '/src/database/repositories',
+  scripts: __dirname + '/src/scripts'
 };
-
-function pathResolver(mainFolder) {
-  if (mainFolder) {
-    return path.join(root, mainFolder);
-  }
-  throw 'No main folder specified';
-}
 
 function capName(val) {
   return val.charAt(0).toUpperCase() + val.slice(1);
 }
 
-function fileCreator(destination, filename, generatorPath, gulpTemplateData, createFolder) {
-  const destinationPath = path.join(pathResolver(destination), createFolder ? '' : filename);
+function fileCreator(destination, filename, generatorPath, gulpTemplateData) {
+  console.log(gulpTemplateData);
   return gulp.src(generatorPath)
     .pipe(gulpTemplate(gulpTemplateData))
     .pipe(gulpRename((path) => {
       path.basename = path.basename.replace('temp', filename);
     }))
-    .pipe(gulp.dest(destinationPath));
+    .pipe(gulp.dest(destination));
 }
-
-gulp.task('create-file-controller', [], () => {
-  const name = yargs.argv.name;
-  fileCreator(mainFolder.controllers, name, generatorPaths.controllers, {
-    name: name,
-    upCaseName: capName(name)
-  });
-});
-
-gulp.task('create-file-middleware', [], () => {
-  const name = yargs.argv.name;
-  fileCreator(mainFolder.middlewares, name, generatorPaths.middlewares, {
-    name: name,
-    upCaseName: capName(name)
-  }, true)
-});
 
 gulp.task('create-file-entity', [], () => {
   const name = yargs.argv.name;
   fileCreator(mainFolder.entities, name, generatorPaths.entities, {
     name: name,
     upCaseName: capName(name)
-  }, true)
+  })
 });
 
-gulp.task('add-controller', ['create-file-controller'], () => {
+gulp.task('create-file-repository', [], () => {
   const name = yargs.argv.name;
-  const destinationPath = path.join(pathResolver(mainFolder.controllers));
-  const line = `\nexport { ${capName(name)} } from './${name}/${name}.controller';`
-  const rootFile = path.join(pathResolver(mainFolder.controllers), 'index.ts');
-
-  return gulp.src(rootFile)
-    .pipe(gulpInsert.append(line))
-    .pipe(gulp.dest(destinationPath));
-});
-
-gulp.task('add-middleware', ['create-file-middleware'], () => {
-  const name = yargs.argv.name;
-  const destinationPath = path.join(pathResolver(mainFolder.middlewares));
-  const line = `\nexport { ${capName(name)} } from './${name}.middleware';`
-  const rootFile = path.join(pathResolver(mainFolder.middlewares), 'index.ts');
-
-  return gulp.src(rootFile)
-    .pipe(gulpInsert.append(line))
-    .pipe(gulp.dest(destinationPath));
+  fileCreator(mainFolder.repositories, name, generatorPaths.repositories, {
+    name: name,
+    upCaseName: capName(name)
+  })
 });
 
 gulp.task('add-entity', ['create-file-entity'], () => {
   const name = yargs.argv.name;
-  const destinationPath = path.join(pathResolver(mainFolder.entities));
   const line = `\nexport { ${capName(name)} } from './${name}.entity';`
-  const rootFile = path.join(pathResolver(mainFolder.entities), 'index.ts');
+  const rootFile = path.join(mainFolder.entities, 'index.ts');
 
   return gulp.src(rootFile)
     .pipe(gulpInsert.append(line))
-    .pipe(gulp.dest(destinationPath));
+    .pipe(gulp.dest(mainFolder.entities));
+});
+
+gulp.task('add-repository', ['create-file-repository'], () => {
+  const name = yargs.argv.name;
+  const line = `\nexport { ${capName(name)} } from './${name}.repository';`
+  const rootFile = path.join(mainFolder.repositories, 'index.ts');
+
+  return gulp.src(rootFile)
+    .pipe(gulpInsert.append(line))
+    .pipe(gulp.dest(mainFolder.repositories));
 });
 
 function createTravisConfig(lifecycle) {
   if (lifecycle) {
     switch (lifecycle) {
-      case 'BEFORE_SCRIPT': 
+      case 'BEFORE_SCRIPT':
         const name = 'before.travis';
         fileCreator(mainFolder.scripts, name, generatorPaths.scripts, {
           databaseName: ormTestConfig.database,
@@ -111,7 +80,7 @@ function createTravisConfig(lifecycle) {
         }, true);
         break;
       default:
-        throw 'No travis lifecycle defined. See https://docs.travis-ci.com/user/customizing-the-build/ for more.'    
+        throw 'No travis lifecycle defined. See https://docs.travis-ci.com/user/customizing-the-build/ for more.'
     }
   } else {
     throw 'No travis lifecycle defined. See https://docs.travis-ci.com/user/customizing-the-build/ for more.'
