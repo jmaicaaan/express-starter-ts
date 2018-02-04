@@ -22,6 +22,16 @@ describe('unit test: user repository', async () => {
     expect(users).to.be.an('array');
   });
 
+  it('should get user by email', async () => {
+    await getCustomRepository(UserRepository).createUser({
+      email: 'test@gmail.com',
+      password: 'test',
+      roles: [{ id: 1, name: 'admin' }]
+    });
+    const user = await getCustomRepository(UserRepository).getUserByEmail('test@gmail.com');
+    expect(user).to.have.property('email', 'test@gmail.com');
+  });
+
   it('should create user', async () => {
     const user = await getCustomRepository(UserRepository).createUser({
       email: 'test',
