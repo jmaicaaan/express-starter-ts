@@ -3,6 +3,7 @@ import { exec } from 'shelljs';
 import { Container } from 'typedi';
 
 import { Database } from './database/database';
+import { UserSeed } from './database/seeds/user.seed';
 
 const db = Container.get(Database);
 
@@ -23,6 +24,23 @@ commander
       throw new Error('Cannot reset database, make sure you have correct ormconfig and connection');
     }
   });
+
+commander
+.command('db:seed')
+.description('seed database base on node env')
+.action(async () => {
+  console.log('seeding database');
+  try {
+    await db.connect();
+    await db.reset();
+    const userSeed = Container.get(UserSeed);
+    await userSeed.seed();
+    await db.disconnect();
+    console.log('done');
+  } catch (error) {
+    throw new Error('Cannot seed database, make sure you have correct ormconfig and connection');
+  }
+});
 
 commander
   .command('migrations:up')

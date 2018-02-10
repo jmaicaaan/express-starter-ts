@@ -1,6 +1,7 @@
 import 'reflect-metadata';
 import { Container, Inject, Service } from 'typedi';
 import { Connection, createConnection, useContainer } from 'typeorm';
+import { UserSeed } from './seeds/user.seed';
 
 @Service()
 export class Database {
