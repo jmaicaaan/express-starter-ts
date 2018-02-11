@@ -32,9 +32,7 @@ commander
   console.log('seeding database');
   try {
     await db.connect();
-    await db.reset();
-    const userSeed = Container.get(UserSeed);
-    await userSeed.seed();
+    await db.seed();
     await db.disconnect();
     console.log('done');
   } catch (error) {

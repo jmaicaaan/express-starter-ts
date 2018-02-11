@@ -6,6 +6,9 @@ import { UserSeed } from './seeds/user.seed';
 @Service()
 export class Database {
 
+  @Inject()
+  private userSeed: UserSeed;
+
   private connection: Connection;
 
   public async connect(): Promise<void> {
@@ -31,6 +34,10 @@ export class Database {
   public async reset() {
     await this.connection.dropDatabase();
     await this.connection.runMigrations();
+  }
+
+  public async seed() {
+    await this.userSeed.seed(this.connection);
   }
 
   private async bootstrap(): Promise<void> {
