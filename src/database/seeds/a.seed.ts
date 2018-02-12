@@ -9,6 +9,12 @@ import { UserRepository } from '../repositories/user.repository';
 @Service()
 export class UserSeed implements SeedInterface {
 
+  // private bcryptService: BcryptService;
+
+  // public constructor(bcryptService: BcryptService) {
+  //   this.bcryptService = bcryptService;
+  // }
+
   public async seed(connection: Connection): Promise<any> {
 
     const bcryptService = Container.get(BcryptService);

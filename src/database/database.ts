@@ -11,13 +11,14 @@ export class Database {
 
   private connection: Connection;
 
-  public async connect(): Promise<void> {
+  public async connect(): Promise<Connection> {
     if (!this.connection) {
       await this.bootstrap();
     }
     if (!this.connection.isConnected) {
       await this.connection.connect();
     }
+    return this.connection;
   }
 
   public async disconnect(): Promise<void> {
@@ -27,7 +28,7 @@ export class Database {
   }
 
   public executeSQL(sql: string, ...params: any[]): Promise<any> {
-   return this.connection.createQueryRunner()
+    return this.connection.createQueryRunner()
       .query(sql, params);
   }
 
