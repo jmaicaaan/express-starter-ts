@@ -1,0 +1,1 @@
+Files under `scripts` are isolated to prevent circular dependencies.
