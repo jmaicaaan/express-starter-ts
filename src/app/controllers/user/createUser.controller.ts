@@ -20,6 +20,9 @@ export class GetUsersController {
     @Body() user: User
   ) {
     const role = await this.roleRepository.getRoleByName(user.roles[0].name);
+    if (!role) {
+      throw new Error('Cannot create user');
+    }
     const data = await this.userRepository.createUser({
       email: user.email,
       password: await this.bcryptService.hashString(user.password),

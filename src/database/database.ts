@@ -6,18 +6,17 @@ import { UserSeed } from './seeds/user.seed';
 @Service()
 export class Database {
 
-  @Inject()
-  private userSeed: UserSeed;
-
-  private connection: Connection;
+  private connection?: Connection;
 
   public async connect(): Promise<Connection> {
-    if (!this.connection) {
-      await this.bootstrap();
+    if (this.connection) {
+      return this.connection;
     }
-    if (!this.connection.isConnected) {
-      await this.connection.connect();
-    }
+    useContainer(Container);
+    /**
+     * Create a database connection using the ormconfig under config/ folder
+     */
+    this.connection = await createConnection();
     return this.connection;
   }
 
@@ -28,27 +27,18 @@ export class Database {
   }
 
   public executeSQL(sql: string, ...params: any[]): Promise<any> {
+    if (!this.connection) {
+      throw new Error('Cannot execture SQL. Please check if you have connection');
+    }
     return this.connection.createQueryRunner()
       .query(sql, params);
   }
 
   public async reset() {
+    if (!this.connection) {
+      throw new Error('Cannot reset database. Please check if you have connection');
+    }
     await this.connection.dropDatabase();
     await this.connection.runMigrations();
-  }
-
-  public async seed() {
-    await this.userSeed.seed(this.connection);
-  }
-
-  private async bootstrap(): Promise<void> {
-    if (this.connection) {
-      return;
-    }
-    useContainer(Container);
-    /**
-     * Create a database connection using the ormconfig under config/ folder
-     */
-    this.connection = await createConnection();
   }
 }

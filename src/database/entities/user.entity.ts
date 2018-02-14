@@ -5,14 +5,26 @@ import { Role } from './role.entity';
 @Entity()
 export class User {
 
+  public constructor(data: User) {
+    this.email = data.email;
+    this.password = data.password;
+    this.roles = data.roles;
+  }
+
   @PrimaryGeneratedColumn()
   public id?: number;
 
   @Column('text')
-  public email?: string;
+  public email: string;
 
   @Column('text')
-  public password?: string;
+  public password: string;
+
+  @ManyToMany((type) => Role)
+  @JoinTable({
+    name: 'user_roles'
+  })
+  public roles: Role[];
 
   @Column('boolean', { default: true })
   public enabled?: boolean;
@@ -20,9 +32,4 @@ export class User {
   @Column('timestamp', { default: new Date() })
   public created?: Date;
 
-  @ManyToMany((type) => Role)
-  @JoinTable({
-    name: 'user_roles'
-  })
-  public roles?: Role[];
 }

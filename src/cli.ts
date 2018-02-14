@@ -26,21 +26,6 @@ commander
   });
 
 commander
-.command('db:seed')
-.description('seed database base on node env')
-.action(async () => {
-  console.log('seeding database');
-  try {
-    await db.connect();
-    await db.seed();
-    await db.disconnect();
-    console.log('done');
-  } catch (error) {
-    throw new Error('Cannot seed database, make sure you have correct ormconfig and connection');
-  }
-});
-
-commander
   .command('migrations:up')
   .action(() => {
     exec(`typeorm migrations:run`, (code, stdout, stderr) => {

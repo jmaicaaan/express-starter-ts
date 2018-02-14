@@ -29,7 +29,8 @@
     ],
     "member-access": true,
     "member-ordering": false,
-    "no-implicit-dependencies": false
+    "no-implicit-dependencies": false,
+    "object-literal-shorthand": false
   },
   "rulesDirectory": []
 }

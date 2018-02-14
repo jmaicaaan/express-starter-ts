@@ -20,6 +20,9 @@ export class LoginController {
     @Body() user: User
   ) {
     const data = await this.userRepository.getUserByEmail(user.email);
+    if (!data) {
+      throw new Error('Login failed');
+    }
     const password = await this.bcryptService.compareHash(user.password, data.password);
     if (data && password) {
       const token = this.jwtService.sign({
