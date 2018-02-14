@@ -22,8 +22,8 @@ describe('e2e test: user controller', async () => {
 
   describe('get', async () => {
     it('should get all list of users', async () => {
-      const data = await server.get('/api/users');
-      expect(data.body).to.be.an('array');
+      const response = await server.get('/api/users');
+      expect(response.body).to.be.an('array');
     });
   });
 });

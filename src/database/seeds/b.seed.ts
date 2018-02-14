@@ -37,12 +37,6 @@ export class UserSeed implements SeedInterface {
       email: `test${Date.now()}`,
       password: `test${Date.now()}`
     });
-    const user = new User({
-      email: `test${Date.now()}`,
-      password: `test${Date.now()}`,
-      roles: [{ id: 1, name: 'Admin' }]
-    });
-    await entityManager.save(user);
     await userRepository.save([
       {
         email: `test${Date.now()}`,

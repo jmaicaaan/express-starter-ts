@@ -22,20 +22,20 @@ describe('e2e test: auth controller', async () => {
 
   describe('login', async () => {
     before(async () => {
-      const data = await server.post('/api/users').send({
+      const response = await server.post('/api/users').send({
         email: 'test@gmail.com',
         password: 'test',
         roles: [{ name: 'admin' }]
       });
-      expect(data.body).to.have.property('email', 'test@gmail.com');
+      expect(response.body).to.have.property('email', 'test@gmail.com');
     });
     it('should authorized user', async () => {
-      const data = await server.post('/api/auth').send({
+      const response = await server.post('/api/auth').send({
         email: 'test@gmail.com',
         password: 'test'
       });
-      expect(data.body).to.have.property('user');
-      expect(data.body).to.have.property('token');
+      expect(response.body).to.have.property('user');
+      expect(response.body).to.have.property('token');
     });
   });
 });

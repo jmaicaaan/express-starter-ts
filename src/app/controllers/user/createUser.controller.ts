@@ -21,7 +21,7 @@ export class GetUsersController {
   ) {
     const role = await this.roleRepository.getRoleByName(user.roles[0].name);
     if (!role) {
-      throw new Error('Cannot create user');
+      throw new Error(`Cannot create user, cannot get role: ${user.roles[0].name}`);
     }
     const data = await this.userRepository.createUser({
       email: user.email,

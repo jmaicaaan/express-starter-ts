@@ -5,10 +5,14 @@ import { Role } from './role.entity';
 @Entity()
 export class User {
 
-  public constructor(data: User) {
-    this.email = data.email;
-    this.password = data.password;
-    this.roles = data.roles;
+  public constructor(
+    email: string,
+    password: string,
+    roles: Role[]
+  ) {
+    this.email = email;
+    this.password = password;
+    this.roles = roles;
   }
 
   @PrimaryGeneratedColumn()
