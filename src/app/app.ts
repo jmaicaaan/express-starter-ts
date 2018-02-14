@@ -11,6 +11,7 @@ export class App {
 
   public constructor() {
     useContainer(Container);
+    console.log('asdasd')
     this.application = createExpressServer({
       routePrefix: '/api',
       controllers: [ __dirname + '/../app/controllers/**/*.controller.js' ],

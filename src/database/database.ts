@@ -10,6 +10,7 @@ export class Database {
 
   public async connect(): Promise<Connection> {
     if (this.connection) {
+      await this.connection.connect();
       return this.connection;
     }
     useContainer(Container);
@@ -21,8 +22,12 @@ export class Database {
   }
 
   public async disconnect(): Promise<void> {
-    if (this.connection && this.connection.isConnected) {
+    if (!this.connection) {
+      throw new Error('Cannot disconnect. Please check if you have connection');
+    }
+    if (this.connection.isConnected) {
       await this.connection.close();
+      console.log('disconnected');
     }
   }
 

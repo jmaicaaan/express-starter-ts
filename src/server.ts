@@ -4,7 +4,7 @@ import { App } from './app/app';
 import { Database } from './database/database';
 
 (async () => {
-  const port = 8000 || process.env.PORT;
+  const port = 4000 || process.env.PORT;
   const app = Container.get(App).getApp();
   const db = Container.get(Database);
   await db.connect();
