@@ -16,10 +16,14 @@ export class UserRepository extends Repository<User> {
   }
 
   public async getUserByEmail(email: string): Promise<User | undefined> {
-    return this.findOne({ where: { email: email } });
+    return this.findOne({ where: { email: email }, relations: ['roles'] });
   }
 
   public async createUser(user: User): Promise<User> {
     return this.save(user);
+  }
+
+  public async deleteUserById(id: number): Promise<void> {
+    return this.updateById(id, { enabled: false });
   }
 }
