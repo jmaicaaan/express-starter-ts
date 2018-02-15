@@ -1,36 +1,17 @@
 {
-  "defaultSeverity": "error",
-  "extends": [
-    "tslint:latest"
-  ],
-  "jsRules": {},
+  "extends": "tslint:latest",
   "rules": {
-    "interface-name": [
-      true,
-      "never-prefix"
-    ],
-    "no-console": [
-      false
-    ],
+    "interface-name": [true, "never-prefix"],
+    "no-console": [false],
     "no-shadowed-variable": false,
     "no-var-requires": false,
     "object-literal-sort-keys": false,
-    "quotemark": [
-      true,
-      "single",
-      "avoid-escape"
-    ],
-    "trailing-comma": [
-      true,
-      {
-        "multiline": "never",
-        "singleline": "never"
-      }
-    ],
+    "quotemark": [true, "single", "avoid-escape"],
+    "trailing-comma": [true, { "multiline": "never", "singleline": "never" }],
+    "variable-name": ["check-format", "allow-leading-underscore"],
     "member-access": true,
     "member-ordering": false,
     "no-implicit-dependencies": false,
-    "object-literal-shorthand": false
-  },
-  "rulesDirectory": []
+    "no-submodule-imports": true
+  }
 }

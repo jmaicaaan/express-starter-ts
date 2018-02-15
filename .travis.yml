@@ -10,11 +10,10 @@ services:
   - postgresql
 
 before_script: 
-  - npm run build && node dist/cli.js travis:ormConfig
-  - node dist/cli.js migrations:up
-  - bash ./scripts/database.travis.sh
+  - npm run setup:config
+  - bash ./src/scripts/before.travis.script.sh
 
 after_success:
-  - rm ./scripts/database.travis.sh
+  - rm ./src/scripts/before.travis.script.sh
 addons:
   postgresql: "9.4"
