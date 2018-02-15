@@ -11,6 +11,7 @@ services:
 
 before_script: 
   - npm run build && node dist/cli.js travis:ormConfig
+  - node dist/cli.js migrations:up
   - bash ./scripts/database.travis.sh
 
 after_success:

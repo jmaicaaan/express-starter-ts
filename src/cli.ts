@@ -83,8 +83,7 @@ commander
       const fileData = `#!/usr/bin/env bash
         psql -U postgres -c "CREATE DATABASE ${ormConfig.database};"
         psql -U postgres -c "CREATE USER ${ormConfig.username} WITH PASSWORD '${ormConfig.password}'"
-        psql -U postgres -c "GRANT ALL PRIVILEGES ON DATABASE ${ormConfig.database} TO ${ormConfig.username};"
-        npm run dbmigrate:up`;
+        psql -U postgres -c "GRANT ALL PRIVILEGES ON DATABASE ${ormConfig.database} TO ${ormConfig.username};"`;
       writeFileSync(join(process.cwd(), 'scripts', 'database.travis.sh'), fileData);
     } catch (error) {
       throw new Error('Failed to create a database.config for travis CI');
