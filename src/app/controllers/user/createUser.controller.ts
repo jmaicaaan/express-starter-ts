@@ -1,15 +1,14 @@
 import { Authorized, Body, JsonController, Post, QueryParam, QueryParams } from 'routing-controllers';
 import { OrmRepository } from 'typeorm-typedi-extensions';
 
-import { User } from '../../../database/entities/user.entity';
-import { RoleRepository } from '../../../database/repositories/role.repository';
-import { UserRepository } from '../../../database/repositories/user.repository';
-import { BcryptService } from '../../../services/brcrypt.service';
+import { User } from '../../../database/entities';
+import { RoleRepository, UserRepository } from '../../../database/repositories';
+import { BcryptService } from '../../../services';
 
 @JsonController('/users')
 export class GetUsersController {
 
-  public constructor(
+  constructor(
     @OrmRepository() private userRepository: UserRepository,
     @OrmRepository() private roleRepository: RoleRepository,
     private bcryptService: BcryptService

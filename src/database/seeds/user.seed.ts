@@ -1,22 +1,26 @@
 import { Chance} from 'chance';
 import { Container, Service } from 'typedi';
 import { Connection, EntityManager, getRepository, QueryRunner, Repository } from 'typeorm';
+
 import { SeedInterface } from '../../libs/seed.interface';
-import { BcryptService } from '../../services/brcrypt.service';
-import { User } from '../entities/user.entity';
-import { UserRepository } from '../repositories/user.repository';
+import { BcryptService } from '../../services';
+import { User } from '../entities';
+import { UserRepository } from '../repositories';
 
 @Service()
 export class UserSeed implements SeedInterface {
 
-  public async seed(connection: Connection): Promise<any> {
+  public async seed(connection: Connection): Promise<void> {
+    /**
+     * This is a test seed only
+     */
 
     const bcryptService = Container.get(BcryptService);
 
     const chance = new Chance();
     const data: User[] = [];
     let i = 0;
-    while (i < 100) {
+    while (i < 10) {
       data.push({
         email: chance.email({domain: 'example.com'}),
         password: await bcryptService.hashString('test'),

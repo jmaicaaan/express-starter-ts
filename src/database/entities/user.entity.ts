@@ -5,11 +5,7 @@ import { Role } from './role.entity';
 @Entity()
 export class User {
 
-  public constructor(
-    email: string,
-    password: string,
-    roles: Role[]
-  ) {
+  constructor(email: string, password: string, roles: Role[]) {
     this.email = email;
     this.password = password;
     this.roles = roles;

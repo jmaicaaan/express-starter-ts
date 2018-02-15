@@ -4,9 +4,9 @@ import { getCustomRepository } from 'typeorm';
 import { OrmRepository } from 'typeorm-typedi-extensions';
 
 import { RoleRepository, UserRepository } from '../../database/repositories';
-import { JsonWebTokenService } from '../../services/jsonwebtoken.service';
+import { JWTService } from '../../services';
 
-const jwtService = Container.get(JsonWebTokenService);
+const jwtService = Container.get(JWTService);
 const userRepository = Container.get(UserRepository);
 
 export async function authorizationChecker(action: Action, roles: string[]): Promise<boolean> {

@@ -11,11 +11,11 @@ export class UserRepository extends Repository<User> {
     return this.find(options);
   }
 
-  public async getUserById(id: number): Promise<User | undefined> {
+  public async getUserById(id: number): Promise<User> {
     return this.findOneById(id);
   }
 
-  public async getUserByEmail(email: string): Promise<User | undefined> {
+  public async getUserByEmail(email: string): Promise<User> {
     return this.findOne({ where: { email: email }, relations: ['roles'] });
   }
 

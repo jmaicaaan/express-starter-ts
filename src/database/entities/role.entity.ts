@@ -3,7 +3,7 @@ import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 @Entity()
 export class Role {
 
-  public constructor(name: string) {
+  constructor(name: string) {
     this.name = name;
   }
 

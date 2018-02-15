@@ -2,6 +2,8 @@ import * as commander from 'commander';
 import { exec } from 'shelljs';
 import { Container } from 'typedi';
 
+import { writeFileSync } from 'fs';
+import { join } from 'path';
 import { Database } from './database/database';
 import { UserSeed } from './database/seeds/user.seed';
 
@@ -71,6 +73,22 @@ commander
       }
       console.log('migration output:', stdout);
     });
+  });
+
+commander
+  .command('travis:ormConfig')
+  .action(() => {
+    try {
+      const ormConfig = require('../config/ormconfig.test.json');
+      const fileData = `#!/usr/bin/env bash
+        psql -U postgres -c "CREATE DATABASE ${ormConfig.database};"
+        psql -U postgres -c "CREATE USER ${ormConfig.username} WITH PASSWORD '${ormConfig.password}'"
+        psql -U postgres -c "GRANT ALL PRIVILEGES ON DATABASE ${ormConfig.database} TO ${ormConfig.username};"
+        npm run dbmigrate:up`;
+      writeFileSync(join(process.cwd(), 'scripts', 'database.travis.sh'), fileData);
+    } catch (error) {
+      throw new Error('Failed to create a database.config for travis CI');
+    }
   });
 
 commander

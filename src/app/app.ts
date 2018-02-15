@@ -3,6 +3,7 @@ import 'reflect-metadata';
 import { Application } from 'express';
 import { createExpressServer, useContainer } from 'routing-controllers';
 import { Container, Service } from 'typedi';
+
 import { authorizationChecker } from './middlewares/authorizationChecker.middleware';
 
 @Service()

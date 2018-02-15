@@ -6,7 +6,7 @@ import { Container } from 'typedi';
 import { Database } from '../../../database/database';
 import { App } from '../../app';
 
-describe('e2e test: user controller', async () => {
+describe('e2e test: Create User Controller', () => {
 
   const app = Container.get(App).getApp();
   const db = Container.get(Database);
@@ -20,7 +20,7 @@ describe('e2e test: user controller', async () => {
     await db.disconnect();
   });
 
-  describe('create', async () => {
+  describe('create', () => {
     it('should create user with role', async () => {
       await server.post('/api/users').send({
         email: 'test',

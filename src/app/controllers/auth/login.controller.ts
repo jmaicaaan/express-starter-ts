@@ -1,10 +1,9 @@
 import { Authorized, Body, JsonController, Post, QueryParam, QueryParams } from 'routing-controllers';
 import { OrmRepository } from 'typeorm-typedi-extensions';
 
-import { User } from '../../../database/entities/user.entity';
-import { UserRepository } from '../../../database/repositories/user.repository';
-import { BcryptService } from '../../../services/brcrypt.service';
-import { JsonWebTokenService } from '../../../services/jsonwebtoken.service';
+import { User } from '../../../database/entities';
+import { UserRepository } from '../../../database/repositories';
+import { BcryptService, JWTService } from '../../../services';
 
 @JsonController('/auth')
 export class LoginController {
@@ -12,7 +11,7 @@ export class LoginController {
   public constructor(
     @OrmRepository() private userRepository: UserRepository,
     private bcryptService: BcryptService,
-    private jwtService: JsonWebTokenService
+    private jwtService: JWTService
   ) {}
 
   @Post()

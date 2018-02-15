@@ -6,7 +6,7 @@ import { UserSeed } from './seeds/user.seed';
 @Service()
 export class Database {
 
-  private connection?: Connection;
+  private connection: Connection;
 
   public async connect(): Promise<Connection> {
     if (this.connection) {
@@ -27,7 +27,6 @@ export class Database {
     }
     if (this.connection.isConnected) {
       await this.connection.close();
-      console.log('disconnected');
     }
   }
 
