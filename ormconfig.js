@@ -8,10 +8,10 @@ try {
   config = require(path);
 }
 
-config.entities = [ process.cwd() +  '/dist/database/entities/*.entity.js' ];
-config.migrations = [ process.cwd() + '/dist/database/migrations/*.js' ];
+config.entities = [ process.cwd() +  '/dist/entities/index.js' ];
+config.migrations = [ process.cwd() + '/dist/migrations/*.js' ];
 config.cli = {
-  migrationsDir: '/src/database/migrations/'
+  migrationsDir: '/src/migrations/'
 };
 
 module.exports = config;

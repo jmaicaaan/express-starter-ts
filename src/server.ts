@@ -1,14 +1,13 @@
 import { Container } from 'typedi';
 
-import { App } from './app/app';
-import { Database } from './database/database';
+import { App, Database } from './utils';
 
-const port = 4000 || process.env.PORT;
+const port = process.env.PORT || 3000;
 const app = Container.get(App).getApp();
-const database = Container.get(Database);
 
+const database = Container.get(Database);
 database.connect();
 
 app.listen(port, () => {
-  console.log(`Server listening at locahost:${port}`);
+  console.log(`server listening at http://localhost:${port}`);
 });
