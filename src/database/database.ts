@@ -3,8 +3,12 @@ import { Container, Inject, Service } from 'typedi';
 import { Connection, createConnection, useContainer } from 'typeorm';
 import { UserSeed } from './seeds/user.seed';
 
+import { ConnectionSecure } from '../decorators/ConnectionSecure';
+import { IDatabase } from '../libs/IDatabase';
+
 @Service()
-export class Database {
+@ConnectionSecure
+export class Database implements IDatabase {
 
   private connection: Connection;
 
@@ -22,26 +26,17 @@ export class Database {
   }
 
   public async disconnect(): Promise<void> {
-    if (!this.connection) {
-      throw new Error('Cannot disconnect. Please check if you have connection');
-    }
     if (this.connection.isConnected) {
       await this.connection.close();
     }
   }
 
   public executeSQL(sql: string, ...params: any[]): Promise<any> {
-    if (!this.connection) {
-      throw new Error('Cannot execture SQL. Please check if you have connection');
-    }
     return this.connection.createQueryRunner()
       .query(sql, params);
   }
 
   public async reset() {
-    if (!this.connection) {
-      throw new Error('Cannot reset database. Please check if you have connection');
-    }
     await this.connection.dropDatabase();
     await this.connection.runMigrations();
   }
