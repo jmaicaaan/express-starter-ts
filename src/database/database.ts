@@ -7,7 +7,7 @@ import { ConnectionSecure } from '../decorators/ConnectionSecure';
 import { IDatabase } from '../libs/IDatabase';
 
 @Service()
-@ConnectionSecure
+@ConnectionSecure(['connect'])
 export class Database implements IDatabase {
 
   private connection: Connection;
