@@ -2,13 +2,13 @@ import { Chance} from 'chance';
 import { Container, Service } from 'typedi';
 import { Connection, EntityManager, getRepository, QueryRunner, Repository } from 'typeorm';
 
-import { SeedInterface } from '../../libs/seed.interface';
+import { ISeed } from '../../libs/seed.interface';
 import { BcryptService } from '../../services';
 import { User } from '../entities';
 import { UserRepository } from '../repositories';
 
 @Service()
-export class UserSeed implements SeedInterface {
+export class UserSeed implements ISeed {
 
   public async seed(connection: Connection): Promise<void> {
     /**
