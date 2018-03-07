@@ -16,7 +16,7 @@ export class UserRepository extends Repository<User> {
   }
 
   public async getUserByEmail(email: string): Promise<User> {
-    return this.findOne({ where: { email: email }, relations: ['roles'] });
+    return this.findOne({ where: { email }, relations: ['roles'] });
   }
 
   public async createUser(user: User): Promise<User> {
