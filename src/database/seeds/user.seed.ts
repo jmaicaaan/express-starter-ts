@@ -2,10 +2,10 @@ import { Chance} from 'chance';
 import { Container, Service } from 'typedi';
 import { Connection, EntityManager, getRepository, QueryRunner, Repository } from 'typeorm';
 
-import { User } from '../../entities';
 import { ISeed } from '../../libs/seed.interface';
-import { UserRepository } from '../../repositories';
 import { BcryptService } from '../../services';
+import { User } from '../entities';
+import { UserRepository } from '../repositories';
 
 @Service()
 export class UserSeed implements ISeed {
