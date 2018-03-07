@@ -2,8 +2,12 @@ import 'reflect-metadata';
 import { Container, Service } from 'typedi';
 import { Connection, createConnection, useContainer } from 'typeorm';
 
+import { ConnectionSecure } from '../decorators/ConnectionSecure';
+import { IDatabase } from '../libs/IDatabase';
+
 @Service()
-export class Database {
+@ConnectionSecure(['connect'])
+export class Database implements IDatabase {
 
   private connection: Connection;
 
@@ -17,17 +21,26 @@ export class Database {
   }
 
   public async disconnect(): Promise<void> {
+<<<<<<< HEAD:src/utils/database.ts
     if (this.connection && this.connection.isConnected) {
+=======
+    if (this.connection.isConnected) {
+>>>>>>> develop:src/database/database.ts
       await this.connection.close();
     }
   }
 
   public executeSQL(sql: string, ...params: any[]): Promise<any> {
+<<<<<<< HEAD:src/utils/database.ts
    return this.connection.createQueryRunner()
+=======
+    return this.connection.createQueryRunner()
+>>>>>>> develop:src/database/database.ts
       .query(sql, params);
   }
 
   public async reset() {
+<<<<<<< HEAD:src/utils/database.ts
     if (process.env.NODE_ENV === 'test') {
       await this.connection.dropDatabase();
       return this.connection.runMigrations();
@@ -46,5 +59,9 @@ export class Database {
      * Create a database connection using the ormconfig under config/ folder
      */
     this.connection = await createConnection();
+=======
+    await this.connection.dropDatabase();
+    await this.connection.runMigrations();
+>>>>>>> develop:src/database/database.ts
   }
 }

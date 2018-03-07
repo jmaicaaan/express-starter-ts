@@ -1,1 +1,0 @@
-SELECT * FROM "user" WHERE "user"."id" = 1;
