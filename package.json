@@ -1,6 +1,6 @@
 {
   "name": "express-starter-ts",
-  "version": "1.3.0",
+  "version": "2.0.0",
   "description": "This repository gives the developer an Express Starter written in Typescript to kick off there development fast 🔥🔥🔥",
   "main": "index.js",
   "scripts": {
