@@ -14,4 +14,8 @@ config.cli = {
   migrationsDir: '/src/database/migrations/'
 };
 
+if (process.env['DATABASE_HOST']) {
+  config.host = process.env['DATABASE_HOST'];
+}
+
 module.exports = config;
